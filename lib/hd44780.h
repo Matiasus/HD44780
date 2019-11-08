@@ -88,13 +88,16 @@
   #define BIT1 0x02
   #define BIT0 0x01
 
-  #define HD44780_INIT_SEQ     0x03  
+  #define HD44780_4BIT_INIT_SEQ     0x03
+  #define HD44780_8BIT_INIT_SEQ     0x30
+  
   #define HD44780_DISP_CLEAR   0x01
   #define HD44780_DISP_OFF     0x08
   #define HD44780_DISP_ON      0x0C
   #define HD44780_CURSOR_ON    0x0E
   #define HD44780_CURSOR_BLINK 0x0F  
-  #define HD44780_ENTRY_MODE   0x60
+  #define HD44780_ENTRY_MODE   0x06
+  #define HD44780_4BIT_MODE    0x02
   
   // set bit
   #define SETBIT(REG, BIT) { REG |= (1 << BIT); }
@@ -105,16 +108,66 @@
   
   /** @enum Type of operation read / write */
   typedef enum {
-    e4BIT = ;  // 0x40 - status code for success
-    e8BIT =    // 0x18 - status code for success
+    e4BIT = 4;
+    e8BIT = 0
   } EMode;
   
   /**
    * @desc    LCD init - initialisation routine
    *
+   * @param   EMode
+   * @return  void
+   */
+  void HD44780_Init(EMode);
+
+  /**
+   * @desc    LCD send instruction
+   *
+   * @param   unsigned short int
+   * @param   EMode
+   * @return  void
+   */
+  void HD44780_SendInstruction(unsigned short int, EMode);
+
+  /**
+   * @desc    LCD out data
+   *
+   * @param   unsigned short int
+   * @return  void
+   */
+  void HD44780_SendData(unsigned short int);
+
+  /**
+   * @desc    LCD out upper and lower nibbles
+   *
+   * @param   unsigned short int
+   * @param   EMode {e4BIT; e8BIT}
+   * @return  void
+   */
+  void HD44780_SendNibbles(unsigned short int, EMode);
+
+  /**
+   * @desc    LCD send upper nibble
+   *
+   * @param   unsigned short int
+   * @return  void
+   */
+  void HD44780_SendUppNibble(unsigned short int);
+
+  /**
+   * @desc    LCD send
+   *
+   * @param   unsigned short int
+   * @return  void
+   */
+  void HD44780_SendLowNibble(unsigned short int);
+
+  /**
+   * @desc    LCD pulse E
+   *
    * @param   void
    * @return  void
    */
-  void HD44780_Init();
-  
+  void HD44780_PulseE(void);
+
 #endif
