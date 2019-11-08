@@ -102,8 +102,8 @@ void HD44780_Init(EMode mode)
   // -----------------------------   // B - blink cursor: 0 - no, 1 - yes
   //  Upper nibble 0000 -> 0x00
   HD44780_SendInstruction(0x00, mode);
-  //  Lower nibble 1000 -> 0x80
-  HD44780_SendInstruction(0x80, mode);
+  //  Lower nibble 1000 -> 0x08
+  HD44780_SendInstruction(0x08, mode);
   //              |
   // -----------------------------   // 37 us writing DATA into DDRAM or CGRAM
   // | Wait for more than 41 us  |   //  4 us tadd - time after busy flag disapeared
@@ -118,7 +118,7 @@ void HD44780_Init(EMode mode)
   //  Upper nibble 0000 -> 0x00
   HD44780_SendInstruction(0x00, mode);
   //  Lower nibble 0001 -> 0x10
-  HD44780_SendInstruction(0x10, mode);
+  HD44780_SendInstruction(0x01, mode);
   //              |
   // -----------------------------
   // | Wait for more than 41 us  |
@@ -133,7 +133,7 @@ void HD44780_Init(EMode mode)
   //  Upper nibble 0000 -> 0x00
   HD44780_SendInstruction(0x00, mode);
   //  Lower nibble 0110 -> 0x60
-  HD44780_SendInstruction(0x60, mode);
+  HD44780_SendInstruction(0x06, mode);
   //              |
   // -----------------------------
   // | Wait for more than 41 us  |
@@ -142,12 +142,65 @@ void HD44780_Init(EMode mode)
 }
 
 /**
- * @desc    LCD out upper nibble
+ * @desc    LCD send instruction
+ *
+ * @param   unsigned short int
+ * @param   EMode
+ * @return  void
+ */
+void HD44780_SendInstruction(unsigned short int data, EMode mode)
+{
+  // Clear RS
+  CLRBIT(HD44780_PORT_RS, HD44780_RS);
+  // send data to LCD
+  HD44780_SendNibbles(data, mode);
+}
+
+/**
+ * @desc    LCD out data
  *
  * @param   unsigned short int
  * @return  void
  */
-void HD44780_OutUppNibble(unsigned short int data)
+void HD44780_SendData(unsigned short int data)
+{
+  // Set RS
+  SETBIT(HD44780_PORT_RS, HD44780_RS);
+  // send data to LCD
+  HD44780_SendNibbles(data, mode);
+  // Clear RS
+  CLRBIT(HD44780_PORT_RS, HD44780_RS);
+}
+
+/**
+ * @desc    LCD out upper and lower nibbles
+ *
+ * @param   unsigned short int
+ * @param   EMode {e4BIT; e8BIT}
+ * @return  void
+ */
+void HD44780_SendNibbles(unsigned short int data, EMode mode)
+{
+  // Send out upper nibble
+  HD44780_SendUppNibble(data << mode);
+  // if 8bit mode
+  if (mode == e8BIT) {
+    // Send out upper nibble
+    HD44780_SendUppNibble(data & 0xf0);    
+    // Send out lower nibble
+    HD44780_SendLowNibble(data & 0x0f);
+  }
+  // pulse E
+  HD44780_PulseE();
+}
+
+/**
+ * @desc    LCD send upper nibble
+ *
+ * @param   unsigned short int
+ * @return  void
+ */
+void HD44780_SendUppNibble(unsigned short int data)
 {
   // clear bits DB7-DB4
   CLRBIT(HD44780_PORT_DB, HD44780_DB7);
@@ -161,13 +214,13 @@ void HD44780_OutUppNibble(unsigned short int data)
   SET_IF_BIT_IN_DATA_SET(HD44780_PORT_DB, HD44780_DB4, data, BIT4);
 }
 
-  /**
- * @desc    LCD out lower nibble
+/**
+ * @desc    LCD send
  *
  * @param   unsigned short int
  * @return  void
  */
-void HD44780_OutLowNibble(unsigned short int data)
+void HD44780_SendLowNibble(unsigned short int data)
 {
   // clear bits DB3-DB0
   CLRBIT(HD44780_PORT_DB, HD44780_DB3);
@@ -179,55 +232,6 @@ void HD44780_OutLowNibble(unsigned short int data)
   SET_IF_BIT_IN_DATA_SET(HD44780_PORT_DB, HD44780_DB2, data, BIT2);
   SET_IF_BIT_IN_DATA_SET(HD44780_PORT_DB, HD44780_DB1, data, BIT1);
   SET_IF_BIT_IN_DATA_SET(HD44780_PORT_DB, HD44780_DB0, data, BIT0);
-}
-
-/**
- * @desc    LCD out instruction
- *
- * @param   unsigned short int
- * @return  void
- */
-void HD44780_OutData(unsigned short int data, EMode mode)
-{
-  // Send out upper nibble
-  HD44780_OutUppNibble(data);
-  // if 8bit mode
-  if (mode == e8BIT) {
-    // Send out lower nibble
-    HD44780_OutLowNibble(data);
-  }
-  // pulse E
-  HD44780_PulseE();
-}
-
-/**
- * @desc    LCD out instruction
- *
- * @param   unsigned short int
- * @return  void
- */
-void HD44780_SendInstruction(unsigned short int data, EMode mode)
-{
-  // Clear RS
-  CLRBIT(HD44780_PORT_RS, HD44780_RS);
-  // send data to LCD
-  HD44780_OutData(data, mode);
-}
-
-/**
- * @desc    LCD out instruction
- *
- * @param   unsigned short int
- * @return  void
- */
-void HD44780_SendData(unsigned short int data)
-{
-  // Set RS
-  SETBIT(HD44780_PORT_RS, HD44780_RS);
-  // send data to LCD
-  HD44780_OutData(data, mode)
-  // Clear RS
-  CLRBIT(HD44780_PORT_RS, HD44780_RS);
 }
 
 /**
