@@ -1,5 +1,7 @@
 # C library for HD44780 LCD driver
 
+**in process ...**
+
 ## HD44780 Description
 The HD44780U dot-matrix liquid crystal display controller and driver LSI displays alphanumerics,
 Japanese kana characters, and symbols. It can be configured to drive a dot-matrix liquid crystal display
