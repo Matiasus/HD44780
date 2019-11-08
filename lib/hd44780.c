@@ -38,8 +38,6 @@ void HD44780_Init(EMode mode)
     SETBIT(HD44780_DDR_DB, HD44780_DB1);
     SETBIT(HD44780_DDR_DB, HD44780_DB0);
   }
-
-
   // Initializing LCD Driver HD44780 according to Figure 24
   // in https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
   //
