@@ -110,6 +110,8 @@ void HD44780_Init (EMode mode)
   SETBIT(HD44780_DDR_E, HD44780_E);
   // set RS as output
   SETBIT(HD44780_DDR_RS, HD44780_RS);
+  // set RW as output
+  SETBIT(HD44780_DDR_RW, HD44780_RW);
 
   // set DB7-DB4 as output
   SETBIT(HD44780_DDR_DB, HD44780_DB7);
@@ -122,6 +124,8 @@ void HD44780_Init (EMode mode)
   
   // clear RS
   CLRBIT(HD44780_PORT_RS, HD44780_RS);
+  // clear RW
+  CLRBIT(HD44780_PORT_RW, HD44780_RW);
   // clear E
   CLRBIT(HD44780_PORT_E, HD44780_E);
 
@@ -129,18 +133,18 @@ void HD44780_Init (EMode mode)
   // ---------------------------------------------------------------------
   // Initial sequence 0x30 - send 4 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send4bitsIn4bitMode, HD44780_INIT_SEQ);
-  // delay 4.1ms
-  _delay_ms(4.1);
-
-  // pulse E
-  HD44780_PulseE();
-  // delay 100us
-  _delay_us(100);
-
-  // pulse E
-  HD44780_PulseE();
-  // delay not specified
+  // delay > 4.1ms
   _delay_ms(5);
+
+  // pulse E
+  HD44780_PulseE();
+  // delay > 100us
+  _delay_us(200);
+
+  // pulse E
+  HD44780_PulseE();
+  // delay > 45us (=37+4 * 270/250)
+  _delay_us(50);
   // ----------------------------------------------------------------------
   
   // 4 bit mode 0x20 - send 4 bits in 4 bit mode
@@ -157,6 +161,36 @@ void HD44780_Init (EMode mode)
 
   // entry mode set 0x06 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, HD44780_ENTRY_MODE);
+
+}
+
+/**
+ * @desc    Busy flag read
+ *
+ * @param   void
+ * @return  void
+ */
+char HD44780_ReadBF (void)
+{
+  // clr DB7-DB4 as input
+  CLRBIT(HD44780_DDR_DB, HD44780_DB7);
+  CLRBIT(HD44780_DDR_DB, HD44780_DB6);
+  CLRBIT(HD44780_DDR_DB, HD44780_DB5);
+  CLRBIT(HD44780_DDR_DB, HD44780_DB4);
+
+  // clear RS
+  CLRBIT(HD44780_PORT_RS, HD44780_RS);
+  // set RW - read BF
+  SETBIT(HD44780_PORT_RW, HD44780_RW);
+
+  // loop until PIN DB7 is not 1
+  while ((HD44780_PIN_DB & (1 << HD44780_DB7)));
+
+  // set DB7-DB4 as output
+  SETBIT(HD44780_DDR_DB, HD44780_DB7);
+  SETBIT(HD44780_DDR_DB, HD44780_DB6);
+  SETBIT(HD44780_DDR_DB, HD44780_DB5);
+  SETBIT(HD44780_DDR_DB, HD44780_DB4);
 }
 
 /**
@@ -248,7 +282,7 @@ void HD44780_SendInstruction (void (*SendBitMode) (unsigned short int data), uns
   // send required data in required mode
   SendBitMode(data);
   // delay
-  _delay_us(40);
+  _delay_ms(1);
 }
 
 /**
