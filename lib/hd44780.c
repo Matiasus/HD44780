@@ -98,9 +98,6 @@
 
 unsigned short int HD44780_mode = e4BIT;
 
-
-
-
 /**
  * @desc    LCD init - initialisation routine
  *
@@ -119,59 +116,54 @@ void HD44780_Init (EMode mode)
   SETBIT(HD44780_DDR_DB, HD44780_DB6);
   SETBIT(HD44780_DDR_DB, HD44780_DB5);
   SETBIT(HD44780_DDR_DB, HD44780_DB4);
-  
-  // clear RS
-  CLRBIT(HD44780_PORT_RS, HD44780_RS);
-  // clear RS
-  CLRBIT(HD44780_PORT_E, HD44780_E);
 
-  // set RS
-  SETBIT(HD44780_PORT_RS, HD44780_RS);
-  // set E
-  SETBIT(HD44780_PORT_E, HD44780_E);
   // delay
-  _delay_ms(15);
+  _delay_ms(15);  
+  
   // clear RS
   CLRBIT(HD44780_PORT_RS, HD44780_RS);
   // clear E
   CLRBIT(HD44780_PORT_E, HD44780_E);
 
-  // Initial sequence - send 4 bits in 4 bit mode
+  // Busy Flag (BF) cannot be checked before these instructions
+  // ---------------------------------------------------------------------
+  // Initial sequence 0x30 - send 4 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send4bitsIn4bitMode, HD44780_INIT_SEQ);
-  // delay
-  _delay_ms(5);
+  // delay 4.1ms
+  _delay_ms(4.1);
 
   // pulse E
   HD44780_PulseE();
-  // delay
-  _delay_ms(5);
-
-  // pulse E
-  HD44780_PulseE();
-  // delay
+  // delay 100us
   _delay_us(100);
 
-  // 4bit interfacing - send 4 bits in 4 bit mode
+  // pulse E
+  HD44780_PulseE();
+  // delay not specified
+  _delay_ms(5);
+  // ----------------------------------------------------------------------
+  
+  // 4 bit mode 0x20 - send 4 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send4bitsIn4bitMode, HD44780_4BIT_MODE);
   // delay
-  _delay_us(100);
+  _delay_us(40);
 
-  // 4bit interfacing - send 8 bits in 4 bit mode
+  // 4bit & 2lines & 5x8dots 0x28 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, HD44780_4BIT_MODE | HD44780_2_ROWS);
   // delay
-  _delay_us(100);
+  _delay_us(40);
 
-  // 4bit interfacing - send 8 bits in 4 bit mode
+  // display off 0x08 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0x08);
   // delay
-  _delay_us(100);
+  _delay_us(40);
 
-  // 4bit interfacing - send 8 bits in 4 bit mode
+  // display clear 0x01 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0x01);
   // delay
   _delay_us(100);
 
-  // 4bit interfacing - send 8 bits in 4 bit mode
+  // entry mode set 0x06 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0x06);
   // delay
   _delay_us(100);
