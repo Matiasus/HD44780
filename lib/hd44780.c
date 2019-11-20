@@ -145,29 +145,18 @@ void HD44780_Init (EMode mode)
   
   // 4 bit mode 0x20 - send 4 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send4bitsIn4bitMode, HD44780_4BIT_MODE);
-  // delay
-  _delay_us(40);
 
-  // 4bit & 2lines & 5x8dots 0x28 - send 8 bits in 4 bit mode
+  // 4-bit & 2-lines & 5x8-dots 0x28 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, HD44780_4BIT_MODE | HD44780_2_ROWS);
-  // delay
-  _delay_us(40);
 
   // display off 0x08 - send 8 bits in 4 bit mode
-  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0x08);
-  // delay
-  _delay_us(40);
+  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, HD44780_DISP_OFF);
 
   // display clear 0x01 - send 8 bits in 4 bit mode
-  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0x01);
-  // delay
-  _delay_us(100);
+  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, HD44780_DISP_CLEAR);
 
   // entry mode set 0x06 - send 8 bits in 4 bit mode
-  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0x06);
-  // delay
-  _delay_us(100);
-
+  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, HD44780_ENTRY_MODE);
 }
 
 /**
@@ -258,6 +247,8 @@ void HD44780_SendInstruction (void (*SendBitMode) (unsigned short int data), uns
   HD44780_PORT_RS &= ~(1 << HD44780_RS);
   // send required data in required mode
   SendBitMode(data);
+  // delay
+  _delay_us(40);
 }
 
 /**
@@ -274,6 +265,8 @@ void HD44780_SendData (void (*SendBitMode) (unsigned short int data), unsigned s
   SendBitMode(data);
   // Clear RS
   HD44780_PORT_RS &= ~(1 << HD44780_RS);
+  // delay
+  _delay_us(40);  
 }
 
 /**
@@ -302,6 +295,8 @@ void HD44780_Send8bitsIn4bitMode (unsigned short int data)
   HD44780_SetUppNibble(data);
   // pulse E
   HD44780_PulseE();
+  // delay
+  //_delay_us(1);
   // send data to LCD
   HD44780_SetUppNibble(data << 4);
   // pulse E
