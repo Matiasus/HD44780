@@ -25,6 +25,7 @@
   #endif
 
   #if defined(__AVR_ATmega16__)
+
     // E port
     #ifndef HD44780_DDR_E
       #define HD44780_DDR_E   DDRB
@@ -34,7 +35,18 @@
     #endif
     #ifndef HD44780_E
       #define HD44780_E       3
-    #endif      
+    #endif
+
+    // RW port
+    #ifndef HD44780_DDR_RW
+      #define HD44780_DDR_RW  DDRB
+    #endif  
+    #ifndef HD44780_PORT_RW
+      #define HD44780_PORT_RW PORTB
+    #endif
+    #ifndef HD44780_RW
+      #define HD44780_RW      2
+    #endif
     
     // RS port
     #ifndef HD44780_DDR_RS
@@ -44,7 +56,7 @@
       #define HD44780_PORT_RS PORTB
     #endif    
     #ifndef HD44780_RS
-      #define HD44780_RS      2
+      #define HD44780_RS      1
     #endif
     
     // DATA port 
@@ -53,7 +65,12 @@
     #endif
     #ifndef HD44780_PORT_DB
       #define HD44780_PORT_DB  PORTB
-    #endif    
+    #endif
+    #ifndef HD44780_PIN_DB
+      #define HD44780_PIN_DB   PINB
+    #endif
+
+    // port / pin 
     #ifndef HD44780_DB7    
       #define HD44780_DB7 7 // LCD PORT DB7
     #endif
@@ -66,7 +83,6 @@
     #ifndef HD44780_DB4    
       #define HD44780_DB4 4 // LCD PORT DB4
     #endif
-/*
     #ifndef HD44780_DB3    
       #define HD44780_DB3 3 // LCD PORT DB3
     #endif
@@ -79,7 +95,7 @@
     #ifndef HD44780_DB0    
       #define HD44780_DB0 0 // LCD PORT DB0
     #endif   
-*/  
+
   #endif  
   
   #define BIT7 0x80
@@ -91,12 +107,14 @@
   #define BIT1 0x02
   #define BIT0 0x01
   
+  #define HD44780_BUSY_FLAG    HD44780_DB7
   #define HD44780_INIT_SEQ     0x30
   #define HD44780_DISP_CLEAR   0x01
   #define HD44780_DISP_OFF     0x08
   #define HD44780_DISP_ON      0x0C
   #define HD44780_CURSOR_ON    0x0E
-  #define HD44780_CURSOR_BLINK 0x0F  
+  #define HD44780_CURSOR_BLINK 0x0F
+  #define HD44780_RETURN_HOME  0x02 
   #define HD44780_ENTRY_MODE   0x06
   #define HD44780_4BIT_MODE    0x20
   #define HD44780_8BIT_MODE    0x30
@@ -214,6 +232,14 @@
    * @return  void
    */
   void HD44780_SetLowNibble (unsigned short int);
+
+  /**
+   * @desc    Busy flag read
+   *
+   * @param   void
+   * @return  void
+   */
+  void HD44780_WaitTillBFClear (void);
 
   /**
    * @desc    LCD pulse E
