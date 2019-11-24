@@ -17,6 +17,11 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
+  // Error
+  #ifndef ERROR
+    #define ERROR             1
+  #endif 
+
   // define clock
   #if defined(__AVR_ATmega8__)
     #define _FCPU 8000000
@@ -119,10 +124,23 @@
   #define HD44780_4BIT_MODE    0x20
   #define HD44780_8BIT_MODE    0x30
   #define HD44780_2_ROWS       0x08
+  #define HD44780_FONT_5x8     0x00
   #define HD44780_FONT_5x10    0x04
+  #define HD44780_POSITION     0x80
+
+  #define HD44780_SHIFT        0x10
+  #define HD44780_CURSOR       0x00
+  #define HD44780_DISPLAY      0x08
+  #define HD44780_LEFT         0x00
+  #define HD44780_RIGHT        0x04
+
+  #define HD44780_ROWS         2
+  #define HD44780_COLS         16
 
   #define HD44780_ROW1_START   0x00
+  #define HD44780_ROW1_END     HD44780_COLS
   #define HD44780_ROW2_START   0x40
+  #define HD44780_ROW2_END     HD44780_COLS
 
   // **********************************************
   //                      !!!
@@ -198,6 +216,24 @@
    * @return  void
    */
   void HD44780_DrawString (char *str);
+
+  /**
+   * @desc    Got to position x,y
+   *
+   * @param   char
+   * @param   char
+   * @return  char
+   */
+  char HD44780_PositionXY (char x, char y);
+
+  /**
+   * @desc    Shift cursor / display to left / right
+   *
+   * @param   char item {HD44780_CURSOR; HD44780_DISPLAY}
+   * @param   char direction {HD44780_RIGHT; HD44780_LEFT}
+   * @return  char
+   */
+  char HD44780_Shift (char item, char direction);
 
   /**
    * @desc    Check Busy Flag (BF) in 8 bit mode

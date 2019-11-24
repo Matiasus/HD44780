@@ -173,6 +173,76 @@ void HD44780_DrawString (char *str)
 }
 
 /**
+ * @desc    Got to position x,y
+ *
+ * @param   char
+ * @param   char
+ * @return  char
+ */
+char HD44780_PositionXY (char x, char y)
+{
+  if (x > HD44780_COLS || y > HD44780_ROWS) {
+    // error
+    return ERROR;
+  }
+  // check which row
+  if (y == 0) {
+    // send instruction 1st row
+    HD44780_SendInstruction(HD44780_POSITION | (HD44780_ROW1_START + x));
+  } else if (y == 1) {
+    // send instruction 2nd row
+    HD44780_SendInstruction(HD44780_POSITION | (HD44780_ROW2_START + x));
+  }
+  // success
+  return 0;
+}
+
+/**
+ * @desc    Shift cursor / display to left / right
+ *
+ * @param   char item {HD44780_CURSOR; HD44780_DISPLAY}
+ * @param   char direction {HD44780_RIGHT; HD44780_LEFT}
+ * @return  char
+ */
+char HD44780_Shift (char item, char direction)
+{
+  // check if item is cursor or display or direction is left or right
+  if ((item != HD44780_DISPLAY) && (item != HD44780_CURSOR)) {
+    // error
+    return ERROR;
+  }
+  // check if direction is left or right
+  if ((direction != HD44780_RIGHT) && (direction != HD44780_LEFT)) {
+    // error
+    return ERROR;
+  }
+
+  // cursor shift
+  if (item == HD44780_CURSOR) {
+    // right shift
+    if (direction == HD44780_RIGHT) {
+      // shit cursor / display to right / left
+      HD44780_SendInstruction(HD44780_SHIFT | HD44780_CURSOR | HD44780_RIGHT);
+    } else {
+      // shit cursor / display to right / left
+      HD44780_SendInstruction(HD44780_SHIFT | HD44780_CURSOR | HD44780_LEFT);
+    }
+  // display shift
+  } else {
+    // right shift
+    if (direction == HD44780_RIGHT) {
+      // shit cursor / display to right / left
+      HD44780_SendInstruction(HD44780_SHIFT | HD44780_DISPLAY | HD44780_RIGHT);
+    } else {
+      // shit cursor / display to right / left
+      HD44780_SendInstruction(HD44780_SHIFT | HD44780_DISPLAY | HD44780_LEFT);
+    }
+  }
+  // success
+  return 0;
+}
+
+/**
  * @desc    LCD init - initialisation routine
  *
  * @param   void
@@ -226,7 +296,7 @@ void HD44780_Init (void)
   // ----------------------------------------------------------------------
   
   // 4-bit & 2-lines & 5x8-dots 0x28 - send 8 bits in 4 bit mode
-  HD44780_SendInstruction(HD44780_4BIT_MODE | HD44780_2_ROWS);
+  HD44780_SendInstruction(HD44780_4BIT_MODE | HD44780_2_ROWS | HD44780_FONT_5x8);
 
   // display off 0x08 - send 8 bits in 4 bit mode
   HD44780_SendInstruction(HD44780_DISP_OFF);
