@@ -199,7 +199,6 @@
    */
   void HD44780_DrawString (char *str);
 
-
   /**
    * @desc    Check Busy Flag (BF) in 8 bit mode
    *
