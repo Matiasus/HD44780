@@ -17,6 +17,11 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
+  // Error
+  #ifndef ERROR
+    #define ERROR             1
+  #endif 
+
   // define clock
   #if defined(__AVR_ATmega8__)
     #define _FCPU 8000000
@@ -28,10 +33,10 @@
 
     // E port
     #ifndef HD44780_DDR_E
-      #define HD44780_DDR_E   DDRB
+      #define HD44780_DDR_E   DDRD
     #endif  
     #ifndef HD44780_PORT_E
-      #define HD44780_PORT_E  PORTB
+      #define HD44780_PORT_E  PORTD
     #endif
     #ifndef HD44780_E
       #define HD44780_E       3
@@ -39,10 +44,10 @@
 
     // RW port
     #ifndef HD44780_DDR_RW
-      #define HD44780_DDR_RW  DDRB
+      #define HD44780_DDR_RW  DDRD
     #endif  
     #ifndef HD44780_PORT_RW
-      #define HD44780_PORT_RW PORTB
+      #define HD44780_PORT_RW PORTD
     #endif
     #ifndef HD44780_RW
       #define HD44780_RW      2
@@ -50,24 +55,24 @@
     
     // RS port
     #ifndef HD44780_DDR_RS
-      #define HD44780_DDR_RS  DDRB
+      #define HD44780_DDR_RS  DDRD
     #endif
     #ifndef HD44780_PORT_RS
-      #define HD44780_PORT_RS PORTB
+      #define HD44780_PORT_RS PORTD
     #endif    
     #ifndef HD44780_RS
       #define HD44780_RS      1
     #endif
     
-    // DATA port 
+    // DATA port / pin
     #ifndef HD44780_DDR_DB
-      #define HD44780_DDR_DB   DDRB
+      #define HD44780_DDR_DB   DDRD
     #endif
     #ifndef HD44780_PORT_DB
-      #define HD44780_PORT_DB  PORTB
+      #define HD44780_PORT_DB  PORTD
     #endif
     #ifndef HD44780_PIN_DB
-      #define HD44780_PIN_DB   PINB
+      #define HD44780_PIN_DB   PIND
     #endif
 
     // port / pin 
@@ -96,7 +101,7 @@
       #define HD44780_DB0 0 // LCD PORT DB0
     #endif   
 
-  #endif  
+  #endif
   
   #define BIT7 0x80
   #define BIT6 0x40
@@ -119,10 +124,35 @@
   #define HD44780_4BIT_MODE    0x20
   #define HD44780_8BIT_MODE    0x30
   #define HD44780_2_ROWS       0x08
+  #define HD44780_FONT_5x8     0x00
   #define HD44780_FONT_5x10    0x04
+  #define HD44780_POSITION     0x80
+
+  #define HD44780_SHIFT        0x10
+  #define HD44780_CURSOR       0x00
+  #define HD44780_DISPLAY      0x08
+  #define HD44780_LEFT         0x00
+  #define HD44780_RIGHT        0x04
+
+  #define HD44780_ROWS         2
+  #define HD44780_COLS         16
 
   #define HD44780_ROW1_START   0x00
+  #define HD44780_ROW1_END     HD44780_COLS
   #define HD44780_ROW2_START   0x40
+  #define HD44780_ROW2_END     HD44780_COLS
+
+  // **********************************************
+  //                      !!!
+  //      MODE DEFINITION - CORRECTLY DEFINED
+  //
+  // ----------------------------------------------
+  //
+  //  HD44780_4BIT_MODE - 4 bit mode / 4 data wires 
+  //  HD44780_8BIT_MODE - 8 bit mode / 8 data wires    
+  //
+  // **********************************************
+  #define HD44780_MODE         HD44780_4BIT_MODE
   
   // set bit
   #define SETBIT(REG, BIT) { REG |= (1 << BIT); }
@@ -131,19 +161,13 @@
   // set port / pin if bit is set
   #define SET_IF_BIT_IS_SET(REG, PORT, DATA, BIT) { if((DATA & BIT) > 0) { SETBIT(REG, PORT); } }
   
-  /** @enum Type of operation read / write */
-  typedef enum {
-    e4BIT = 4,
-    e8BIT = 0
-  } EMode;
-  
   /**
    * @desc    LCD init - initialisation routine
    *
-   * @param   EMode
+   * @param   void
    * @return  void
    */
-  void HD44780_Init(EMode);
+  void HD44780_Init(void);
 
   /**
    * @desc    LCD display clear
@@ -178,20 +202,70 @@
   void HD44780_CursorBlink (void);
 
   /**
-   * @desc    LCD send instruction
+   * @desc    LCD draw char
    *
-   * @param   void (*function) (unsigned short int)
+   * @param  char
    * @return  void
    */
-  void HD44780_SendInstruction (void (*SendBitMode) (unsigned short int), unsigned short int);
+  void HD44780_DrawChar (char character);
+
+  /**
+   * @desc    LCD draw string
+   *
+   * @param   char *
+   * @return  void
+   */
+  void HD44780_DrawString (char *str);
+
+  /**
+   * @desc    Got to position x,y
+   *
+   * @param   char
+   * @param   char
+   * @return  char
+   */
+  char HD44780_PositionXY (char x, char y);
+
+  /**
+   * @desc    Shift cursor / display to left / right
+   *
+   * @param   char item {HD44780_CURSOR; HD44780_DISPLAY}
+   * @param   char direction {HD44780_RIGHT; HD44780_LEFT}
+   * @return  char
+   */
+  char HD44780_Shift (char item, char direction);
+
+  /**
+   * @desc    Check Busy Flag (BF) in 8 bit mode
+   *
+   * @param   void
+   * @return  void
+   */
+  void HD44780_CheckBFin8bitMode (void);
+
+  /**
+   * @desc    Check Busy Flag (BF) in 4 bit mode
+   *
+   * @param   void
+   * @return  void
+   */
+  void HD44780_CheckBFin4bitMode (void);
+
+  /**
+   * @desc    LCD send instruction
+   *
+   * @param   unsigned char
+   * @return  void
+   */
+  void HD44780_SendInstruction (unsigned short int);
 
   /**
    * @desc    LCD send data
    *
-   * @param   void (*function) (unsigned short int)
+   * @param   unsigned char
    * @return  void
    */
-  void HD44780_SendData (void (*SendBitMode) (unsigned short int), unsigned short int);
+  void HD44780_SendData (unsigned short int);
 
   /**
    * @desc    LCD send 4bits instruction in 4 bit mode
@@ -234,19 +308,35 @@
   void HD44780_SetLowNibble (unsigned short int);
 
   /**
-   * @desc    Busy flag read
-   *
-   * @param   void
-   * @return  void
-   */
-  void HD44780_WaitTillBFClear (void);
-
-  /**
    * @desc    LCD pulse E
    *
    * @param   void
    * @return  void
    */
   void HD44780_PulseE (void);
+
+  /**
+   * @desc    Set PORT DB4 to DB7
+   *
+   * @param   void
+   * @return  void
+   */
+  void HD44780_SetPORT_DB4to7 (void);
+
+  /**
+   * @desc    Set DDR DB4 to DB7
+   *
+   * @param   void
+   * @return  void
+   */
+  void HD44780_SetDDR_DB4to7 (void);
+
+  /**
+   * @desc    Clear DDR DB4 to DB7
+   *
+   * @param   void
+   * @return  void
+   */
+  void HD44780_ClearDDR_DB4to7 (void);
 
 #endif
