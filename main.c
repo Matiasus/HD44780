@@ -28,11 +28,38 @@ int main (void)
 {
   // init diplay in 4 bit mode
   HD44780_Init();
-  // cursor blink
-  HD44780_DisplayOn();
 
+  // display clear
+  HD44780_DisplayClear();
   // send char
   HD44780_DrawString("I LOVE YOU TINKA");
+  // set position
+  HD44780_PositionXY(5, 1);
+  // send char
+  HD44780_DrawString("MARIAN");
+  // display clear
+  HD44780_CursorOn();
+
+  _delay_ms(1000);
+  
+  // shift cursor to right
+  HD44780_Shift(HD44780_CURSOR, HD44780_LEFT);
+
+  _delay_ms(1000);
+  
+  // shift cursor to right
+  HD44780_Shift(HD44780_CURSOR, HD44780_RIGHT);
+
+  _delay_ms(1000);
+  
+  // shift cursor to right
+  HD44780_Shift(HD44780_DISPLAY, HD44780_LEFT);
+
+  _delay_ms(1000);
+  
+  // shift cursor to right
+  HD44780_Shift(HD44780_DISPLAY, HD44780_RIGHT);
+
 
   // return value
   return 0;
