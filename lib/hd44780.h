@@ -186,7 +186,7 @@
   /**
    * @desc    LCD draw char
    *
-   * @param   unsigned char
+   * @param  char
    * @return  void
    */
   void HD44780_DrawChar (char character);
@@ -194,7 +194,7 @@
   /**
    * @desc    LCD draw string
    *
-   * @param   unsigned char *
+   * @param   char *
    * @return  void
    */
   void HD44780_DrawString (char *str);
