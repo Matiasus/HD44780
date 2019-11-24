@@ -36,8 +36,8 @@ requiring low power dissipation. [HD44780 Datasheet](https://www.sparkfun.com/da
 
 ## Library
 Library supports 4-bit and 8-bit communication with HD44780 LCD driver. Detail description how to interface with MCU is in:
-- [4-bit Operation](#4bit-operation)
-- [8-bit Operation](#8bit-operation)
+- [4-bit Operation](#4-bit-operation)
+- [8-bit Operation](#8-bit-operation)
 
 ### 4-bit Operation
 
