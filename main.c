@@ -27,40 +27,12 @@
 int main (void)
 {
   // init diplay in 4 bit mode
-  HD44780_Init(e4BIT);
+  HD44780_Init();
   // cursor blink
   HD44780_DisplayOn();
 
   // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, ' ');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, ' ');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'T');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'I');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'N');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'K');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'A');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, ' ');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, '&');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, ' ');
-  // second line 0xC0 - send 8 bits in 4 bit mode
-//  HD44780_SendInstruction(HD44780_Send8bitsIn4bitMode, 0xC0);
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'A');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'D');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'K');
-  // send char
-  HD44780_SendData(HD44780_Send8bitsIn4bitMode, 'O');
+  HD44780_DrawString("I LOVE YOU TINKA");
 
   // return value
   return 0;
