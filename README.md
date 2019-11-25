@@ -1,11 +1,12 @@
-# Atmega16 / Atmega8 C-library for HD44780 LCD driver
+# C-library for HD44780 LCD driver
 
 ## HD44780 Description
-A single HD44780U can display up to one 8-character line or two 8-character lines. The HD44780U has pin function compatibility with the HD44780S which allows the user to easily replace an LCD-II with an HD44780U. The HD44780U character generator ROM is extended to generate 208 5x8 dot character fonts and 32 5x10 dot character fonts for a total of 240 different character fonts.
-
-The low power supply (2.7V to 5.5V) of the HD44780U is suitable for any portable battery-driven product requiring low power dissipation. [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
+Detailed information [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
 
 ## Library
+
+### Usage
+Prior defined for Atmega16 / Atmega8.
 Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication. Design for interfacing with MCU:
 - [4-bit Operation](#4-bit-operation)
 - [8-bit Operation](#8-bit-operation)
