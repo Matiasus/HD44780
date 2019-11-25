@@ -1,7 +1,5 @@
 # C library for HD44780 LCD driver
 
-**in process ...**
-
 ## HD44780 Description
 A single HD44780U can display up to one 8-character line or two 8-character lines. The HD44780U has pin function compatibility with the HD44780S which allows the user to easily replace an LCD-II with an HD44780U. The HD44780U character generator ROM is extended to generate 208 5x8 dot character fonts and 32 5x10 dot character fonts for a total of 240 different character fonts.
 
