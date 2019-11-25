@@ -67,15 +67,15 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 ```
 ### Functions
 
-- [void HD44780_Init(void)]
-- [void HD44780_DisplayClear (void)]
-- [void HD44780_DisplayOn (void)]
-- [void HD44780_CursorOn (void)]
-- [void HD44780_CursorBlink (void)]
-- [void HD44780_DrawChar (char character)]
-- [void HD44780_DrawString (char *str)]
-- [char HD44780_PositionXY (char x, char y)]
-- [char HD44780_Shift (char item, char direction)]
+- [void HD44780_Init(void)](#HD44780_Init)
+- [void HD44780_DisplayClear (void)](#HD44780_DisplayClear)
+- [void HD44780_DisplayOn (void)](#HD44780_DisplayOn)
+- [void HD44780_CursorOn (void)](#HD44780_Init)
+- [void HD44780_CursorBlink (void)](#HD44780_Init)
+- [void HD44780_DrawChar (char character)](#HD44780_Init)
+- [void HD44780_DrawString (char * str)](#HD44780_Init)
+- [char HD44780_PositionXY (char x, char y)](#HD44780_Init)
+- [char HD44780_Shift (char item, char direction)](#HD44780_Init)
 
 # Links
 [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
