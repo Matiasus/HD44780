@@ -1,7 +1,7 @@
 # C-library for HD44780 LCD driver
 
 ## HD44780 Description
-Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
+Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
 
 ## Library
 Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication. Design for interfacing with MCU:
