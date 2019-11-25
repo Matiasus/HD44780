@@ -5,11 +5,11 @@
  * Written by Marian Hrinko (mato.hrinko@gmail.com)
  *
  * @author      Marian Hrinko
- * @datum       05.11.2019
+ * @datum       25.11.2019
  * @file        hd44780.c
  * @tested      AVR Atmega16 / AVR Atmega8
- * @inspiration
- * ---------------------------------------------------
+ * @descript    Main file for test library LCD with HD44780 driver
+ * @usage       
  */
 
 // include libraries

@@ -9,7 +9,11 @@
  * @file        hd44780.h
  * @tested      AVR Atmega16 / AVR Atmega8
  * @inspiration
- * ---------------------------------------------------
+ * @description Library designed for LCD with HD44780 driver
+ * @usage       default set 16x2 LCD / but different possibilities 1 row, 80 characters etc
+ *              4-bit or 8bit mode (4-bit mode tested under atmega16) with 3 control wires (RW, RS, E)
+ *              8-bit or 8bit mode (8-bit mode tested under atmega16) with 3 control wires (RW, RS, E)
+ * 
  */
 #ifndef __HD44780_H__
 #define __HD44780_H__
