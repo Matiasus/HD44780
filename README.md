@@ -1,15 +1,15 @@
 # C-library for HD44780 LCD driver
 
 ## HD44780 Description
-Detailed information [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
+Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
 
 ## Library
-
-### Usage
-Prior defined for Atmega16 / Atmega8.
 Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication. Design for interfacing with MCU:
 - [4-bit Operation](#4-bit-operation)
 - [8-bit Operation](#8-bit-operation)
+
+### Usage
+Prior defined for Atmega16 / Atmega8.
 
 ### 4-bit Operation
 
