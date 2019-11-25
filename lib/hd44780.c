@@ -18,83 +18,56 @@
 #include <avr/io.h>
 #include "hd44780.h"
 
-// Initializing LCD Driver HD44780 according to Figure 24
-// in https://www.sparkfun.com/datasheets/LCD/HD44780.pdf
-//
-// -----------------------------
+// +---------------------------+
 // |         Power on          |
-// -----------------------------
-//              |
-// -----------------------------
-// | Wait for more than 15 ms  |
+// | Wait for more than 15 ms  |   // 15 ms wait
 // | after VCC rises to 4.5 V  |
-// -----------------------------
+// +---------------------------+
 //              |
-// -----------------------------
-// |  RS R/W DB7 DB6 DB5 DB4   |
-// |   0   0   0   0   1   1   |
-// -----------------------------
+// +---------------------------+ 
+// |  RS R/W DB7 DB6 DB5 DB4   |   
+// |   0   0   0   0   1   1   |   // Initial sequence 0x30
+// | Wait for more than 4.1 ms |   // 4.1 ms us writing DATA into DDRAM or CGRAM
+// +---------------------------+
 //              |
-// -----------------------------
-// | Wait for more than 4.1 ms |
-// -----------------------------
+// +---------------------------+
+// |  RS R/W DB7 DB6 DB5 DB4   |   
+// |   0   0   0   0   1   1   |   // Initial sequence 0x30
+// | Wait for more than 0.1 ms |   // 100 us writing DATA into DDRAM or CGRAM
+// +---------------------------+
 //              |
-// -----------------------------
-// |  RS R/W DB7 DB6 DB5 DB4   |
-// |   0   0   0   0   1   1   |
-// -----------------------------
+// +---------------------------+
+// |  RS R/W DB7 DB6 DB5 DB4   |   // Initial sequence 0x30
+// |   0   0   0   0   1   1   |   // 37 us writing DATA into DDRAM or CGRAM 4 us tadd - time after busy flag disapeared
+// | Wait for more than 45 us  |   // 37 us + 4 us = 41 us * (270/250) = 45us
+// +---------------------------+  
 //              |
-// -----------------------------
-// | Wait for more than 0.1 ms |
-// -----------------------------
+// +---------------------------+   // 4bit mode 0x20 !!! MUST BE SET TIME, BF CHECK DOESN'T WORK CORRECTLY !!!
+// |  RS R/W DB7 DB6 DB5 DB4   |   // 
+// |   0   0   0   0   1   0   |   // 37 us writing DATA into DDRAM or CGRAM 4 us tadd - time after busy flag disapeared
+// | Wait for more than 45 us  |   // !!! MUST BE SET DELAY TIME, BUSY FLAG CHECK DOESN'T WORK CORRECTLY !!!
+// +---------------------------+
 //              |
-// -----------------------------
-// |  RS R/W DB7 DB6 DB5 DB4   |
-// |   0   0   0   0   1   1   |
-// -----------------------------
+// +---------------------------+
+// |  RS R/W DB7 DB6 DB5 DB4   |   // Display off 0x08
+// |   0   0   0   0   0   0   |   // 
+// |   0   0   1   0   0   0   |   // 
+// |    Wait for BF Cleared    |   // Wait for BF Cleared
+// +---------------------------+
 //              |
-// -----------------------------   // 37 us writing DATA into DDRAM or CGRAM
-// | Wait for more than 41 us  |   //  4 us tadd - time after busy flag disapeared
-// -----------------------------   // 37 us + 4 us = 41 us
+// +---------------------------+
+// |  RS R/W DB7 DB6 DB5 DB4   |   // Display clear 0x01
+// |   0   0   0   0   0   0   |   //
+// |   0   0   0   0   0   1   |   //
+// |    Wait for BF Cleared    |   // Wait for BF Cleared
+// +---------------------------+
 //              |
-// -----------------------------   // 4 bit operation
-// |  RS R/W DB7 DB6 DB5 DB4   |   // 0x20
-// |   0   0   0   0   1   0   |
-// -----------------------------
-//              |
-// -----------------------------   // 37 us writing DATA into DDRAM or CGRAM
-// | Wait for more than 41 us  |   //  4 us tadd - time after busy flag disapeared
-// -----------------------------   // 37 us + 4 us = 41 us
-//              |
-// -----------------------------   // Display off
-// |  RS R/W DB7 DB6 DB5 DB4   |   //
-// |   0   0   0   0   0   0   |   // D - display: 0 - no, 1 - yes
-// |   0   0   1   D   C   B   |   // C - cursor: 0 - no, 1 - yes
-// -----------------------------   // B - blink cursor: 0 - no, 1 - yes
-//              |
-// -----------------------------   // 37 us writing DATA into DDRAM or CGRAM
-// | Wait for more than 41 us  |   //  4 us tadd - time after busy flag disapeared
-// -----------------------------   // 37 us + 4 us = 41 us
-//              |
-// -----------------------------   // Display clear
-// |  RS R/W DB7 DB6 DB5 DB4   |   // 0x01
-// |   0   0   0   0   0   0   |
-// |   0   0   0   0   0   1   |
-// -----------------------------
-//              |
-// -----------------------------
-// | Wait for more than 41 us  |
-// -----------------------------
-//              |
-// -----------------------------   // Entry mode set
-// |  RS R/W DB7 DB6 DB5 DB4   |   //
-// |   0   0   0   0   0   0   |   // I/D - shift cursor  (1 - left, 0 - right)
-// |   0   0   0   1 I/D   S   |   // S - shift text: 1 - no, 0 - yes
-// -----------------------------
-//              |
-// -----------------------------
-// | Wait for more than 41 us  |
-// -----------------------------
+// +---------------------------+
+// |  RS R/W DB7 DB6 DB5 DB4   |   // Entry mode set 0x06
+// |   0   0   0   0   0   0   |   // 
+// |   0   0   0   1   1   0   |   // shift cursor to the left, without text shifting
+// |    Wait for BF Cleared    |   // Wait for BF Cleared
+// +---------------------------+
 
 /**
  * @desc    LCD display clear
