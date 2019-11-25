@@ -63,13 +63,13 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 //              |
 // +---------------------------+
 // |  RS R/W DB7 DB6 DB5 DB4   |   // Initial sequence 0x30
-// |   0   0   0   0   1   1   |   // 37 us writing DATA into DDRAM or CGRAM 4 us tadd - time after busy flag disapeared
+// |   0   0   0   0   1   1   |   // 37 us writing DATA into D(C)DRAM 4us tadd - time after BF disapeared
 // | Wait for more than 45 us  |   // 37 us + 4 us = 41 us * (270/250) = 45us
 // +---------------------------+  
 //              |
 // +---------------------------+   // 4bit mode 0x20 !!! MUST BE SET TIME, BF CHECK DOESN'T WORK CORRECTLY !!!
 // |  RS R/W DB7 DB6 DB5 DB4   |   // 
-// |   0   0   0   0   1   0   |   // 37 us writing DATA into DDRAM or CGRAM 4 us tadd - time after busy flag disapeared
+// |   0   0   0   0   1   0   |   // 37 us writing DATA into D(C)DRAM 4us tadd - time after BF disapeared
 // | Wait for more than 45 us  |   // !!! MUST BE SET DELAY TIME, BUSY FLAG CHECK DOESN'T WORK CORRECTLY !!!
 // +---------------------------+
 //              |
