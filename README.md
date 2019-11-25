@@ -67,9 +67,9 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 ```
 ### Functions
 
-- [HD44780_Init()](#HD44780_Init)
-- [HD44780_DisplayClear()](#HD44780_DisplayClear)
-- [HD44780_DisplayOn ()](#HD44780_DisplayOn)
+- [HD44780_Init( )](#HD44780_Init)
+- [HD44780_DisplayClear( )](#HD44780_DisplayClear)
+- [HD44780_DisplayOn ( )](#HD44780_DisplayOn)
 - [HD44780_CursorOn ()](#HD44780_Init)
 - [HD44780_CursorBlink ()](#HD44780_Init)
 - [HD44780_DrawChar (char character)](#HD44780_Init)
