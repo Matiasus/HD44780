@@ -43,7 +43,7 @@ Library supports 4-bit and 8-bit communication with HD44780 LCD driver. Detail d
 
 Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
  ```c
- // +---------------------------+
+// +---------------------------+
 // |         Power on          |
 // | Wait for more than 15 ms  |   // 15 ms wait
 // | after VCC rises to 4.5 V  |
@@ -67,7 +67,7 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 // | Wait for more than 45 us  |   // 37 us + 4 us = 41 us * (270/250) = 45us
 // +---------------------------+  
 //              |
-// +---------------------------+   // 4bit mode 0x20 !!! MUST BE SET TIME, BF CHECK DOESN'T WORK CORRECTLY !!!
+// +---------------------------+   // 4bit mode 0x20
 // |  RS R/W DB7 DB6 DB5 DB4   |   // 
 // |   0   0   0   0   1   0   |   // 37 us writing DATA into D(C)DRAM 4us tadd - time after BF disapeared
 // | Wait for more than 45 us  |   // !!! MUST BE SET DELAY TIME, BUSY FLAG CHECK DOESN'T WORK CORRECTLY !!!
