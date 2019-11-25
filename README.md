@@ -65,7 +65,17 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 // |    Wait for BF Cleared    |   // Wait for BF Cleared
 // +---------------------------+
 ```
-### 8-bit Operation
+### Functions
+
+- [void HD44780_Init(void)]
+- [void HD44780_DisplayClear (void)]
+- [void HD44780_DisplayOn (void)]
+- [void HD44780_CursorOn (void)]
+- [void HD44780_CursorBlink (void)]
+- [void HD44780_DrawChar (char character)]
+- [void HD44780_DrawString (char *str)]
+- [char HD44780_PositionXY (char x, char y)]
+- [char HD44780_Shift (char item, char direction)]
 
 # Links
 [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
