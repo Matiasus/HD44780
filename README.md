@@ -65,17 +65,22 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 // |    Wait for BF Cleared    |   // Wait for BF Cleared
 // +---------------------------+
 ```
-### Functions
+## Functions
 
-- [HD44780_Init( )](#HD44780_Init)
-- [HD44780_DisplayClear( )](#HD44780_DisplayClear)
-- [HD44780_DisplayOn ( )](#HD44780_DisplayOn)
-- [HD44780_CursorOn ()](#HD44780_Init)
-- [HD44780_CursorBlink ()](#HD44780_Init)
-- [HD44780_DrawChar (char character)](#HD44780_Init)
-- [HD44780_DrawString (char * str)](#HD44780_Init)
-- [HD44780_PositionXY (char x, char y)](#HD44780_Init)
-- [HD44780_Shift (char item, char direction)](#HD44780_Init)
+- [HD44780_Init()](#HD44780_Init)
+- [HD44780_DisplayClear()](#HD44780_DisplayClear)
+- [HD44780_DisplayOn()](#HD44780_DisplayOn)
+- [HD44780_CursorOn()](#HD44780_CursorOn)
+- [HD44780_CursorBlink()](#HD44780_CursorBlink)
+- [HD44780_DrawChar(char character)](#HD44780_DrawChar)
+- [HD44780_DrawString(char * str)](#HD44780_DrawString)
+- [HD44780_PositionXY(char x, char y)](#HD44780_PositionXY)
+- [HD44780_Shift(char item, char direction)](#HD44780_Shift)
+
+### HD44780_Init
+
+### HD44780_DisplayClear
+
 
 # Links
 [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
