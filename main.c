@@ -42,7 +42,7 @@ int main (void)
 
   _delay_ms(1000);
   
-  // shift cursor to right
+  // shift cursor to left
   HD44780_Shift(HD44780_CURSOR, HD44780_LEFT);
 
   _delay_ms(1000);
@@ -52,12 +52,12 @@ int main (void)
 
   _delay_ms(1000);
   
-  // shift cursor to right
+  // shift display to lef
   HD44780_Shift(HD44780_DISPLAY, HD44780_LEFT);
 
   _delay_ms(1000);
   
-  // shift cursor to right
+  // shift display to right
   HD44780_Shift(HD44780_DISPLAY, HD44780_RIGHT);
 
 
