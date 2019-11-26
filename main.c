@@ -22,7 +22,7 @@
  * @desc    Main
  *
  * @param   void
- * @return  void
+ * @return  int
  */
 int main (void)
 {
@@ -39,28 +39,24 @@ int main (void)
   HD44780_DrawString("MARIAN");
   // display clear
   HD44780_CursorOn();
-
+  // delay
   _delay_ms(1000);
   
+  // Check shifting
+  // -----------------------------------------
   // shift cursor to left
   HD44780_Shift(HD44780_CURSOR, HD44780_LEFT);
-
-  _delay_ms(1000);
-  
+  _delay_ms(1000);  
   // shift cursor to right
   HD44780_Shift(HD44780_CURSOR, HD44780_RIGHT);
-
-  _delay_ms(1000);
-  
-  // shift display to lef
+  _delay_ms(1000);  
+  // shift display to left
   HD44780_Shift(HD44780_DISPLAY, HD44780_LEFT);
-
-  _delay_ms(1000);
-  
+  _delay_ms(1000);  
   // shift display to right
   HD44780_Shift(HD44780_DISPLAY, HD44780_RIGHT);
-
-
+  // -------------------------------------------
+  
   // return value
   return 0;
 }
