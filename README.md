@@ -101,10 +101,10 @@ Draw specific char on display according to ANSI table.
 Draw string.
 
 ### HD44780_PositionXY
-
+Set DDRAM or CGRAM position on X, Y.
 
 ### HD44780_Shift
-
+Shift cursor or display to left or right.
 
 # Links
 [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
