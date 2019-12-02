@@ -4,7 +4,7 @@
 Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
 
 ## Library
-Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication. Design for interfacing with MCU:
+Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication.
 - [4-bit Operation](#4-bit-operation)
 - [8-bit Operation](#8-bit-operation)
 
