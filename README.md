@@ -4,7 +4,7 @@
 Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
 
 ## Library
-Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication. Design for interfacing with MCU:
+Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication.
 - [4-bit Operation](#4-bit-operation)
 - [8-bit Operation](#8-bit-operation)
 
@@ -68,20 +68,43 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 ```
 ## Functions
 
-- [HD44780_Init()](#hd44780_init)
-- [HD44780_DisplayClear()](#hd44780_displayclear)
-- [HD44780_DisplayOn()](#hd44780_displayon)
-- [HD44780_CursorOn()](#hd44780_cursoron)
-- [HD44780_CursorBlink()](#hd44780_cursorblink)
-- [HD44780_DrawChar(char character)](#hd44780_drawchar)
-- [HD44780_DrawString(char * str)](#hd44780_drawstring)
-- [HD44780_PositionXY(char x, char y)](#hd44780_positionxy)
-- [HD44780_Shift(char item, char direction)](#hd44780_shift)
+- [HD44780_Init()](#hd44780_init) - init display
+- [HD44780_DisplayClear()](#hd44780_displayclear) - clear display and set position to 0, 0
+- [HD44780_DisplayOn()](#hd44780_displayon) - turn on display
+- [HD44780_CursorOn()](#hd44780_cursoron) - turn on cursor
+- [HD44780_CursorBlink()](#hd44780_cursorblink) - blink the cursor blink
+- [HD44780_DrawChar(char character)](#hd44780_drawchar) - draw character on display
+- [HD44780_DrawString(char * str)](#hd44780_drawstring) - draw string
+- [HD44780_PositionXY(char x, char y)](#hd44780_positionxy) - set position X, Y
+- [HD44780_Shift(char item, char direction)](#hd44780_shift) - shift cursor or display to left or right
 
 ### HD44780_Init
+Base initialisation function. If the electrical characteristics conditions listed under the table Power Supply Conditions Using
+Internal Reset Circuit are not met, the internal reset circuit will not operate normally and will fail to initialize the HD44780U. For such a case, initialization must be performed by the MPU as explained in the section [4-bit Operation](#4-bit-operation) or [8-bit Operation](#8-bit-operation) depending on mode.
 
 ### HD44780_DisplayClear
+Display clear and set cursor to position 0, 0.
 
+### HD44780_DisplayOn
+Turn on the display.
+
+### HD44780_CursorOn
+Turn on the cursor. Cursor will be visible.
+
+### HD44780_CursorBlink
+Turn the cursor blink.
+
+### HD44780_DrawChar
+Draw specific char on display according to ANSI table.
+
+### HD44780_DrawString
+Draw string.
+
+### HD44780_PositionXY
+Set DDRAM or CGRAM position on X, Y.
+
+### HD44780_Shift
+Shift cursor or display to left or right.
 
 # Links
 [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
