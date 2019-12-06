@@ -78,35 +78,60 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 - [HD44780_Shift(char item, char direction)](#hd44780_shift) - shift cursor or display to left or right
 
 ### HD44780_Init
+```c
+void HD44780_Init (void)
+```
 Base initialisation function. If the electrical characteristics conditions listed under the table Power Supply Conditions Using
 Internal Reset Circuit are not met, the internal reset circuit will not operate normally and will fail to initialize the HD44780U. For such a case, initialization must be performed by the MPU as explained in the section [4-bit Operation](#4-bit-operation) or [8-bit Operation](#8-bit-operation) depending on mode.
 
 ### HD44780_DisplayClear
+```c
+void HD44780_DisplayClear (void)
+```
 Display clear and set cursor to position 0, 0.
 
 ### HD44780_DisplayOn
+```c
+void HD44780_DisplayOn (void)
+```
 Turn on the display.
 
 ### HD44780_CursorOn
+```c
+void HD44780_CursorOn (void)
+```
 Turn on the cursor. Cursor will be visible.
 
 ### HD44780_CursorBlink
+```c
+void HD44780_CursorBlink (void)
+```
 Turn the cursor blink.
 
 ### HD44780_DrawChar
+```c
+void HD44780_DrawChar (char character)
+```
 Draw specific char on display according to ANSI table.
 
 ### HD44780_DrawString
+```c
+void HD44780_DrawString (char *str)
+```
 Draw string.
 
 ### HD44780_PositionXY
+```c
+char HD44780_PositionXY (char x, char y)
+```
 Set DDRAM or CGRAM position on X, Y.
 
 ### HD44780_Shift
 ```c
 char HD44780_Shift (char item, char direction)
 ```
-Shift cursor or display to left or right. Item defines either cursor or display we want to move. Two possible values for item are defined:
+Shift cursor or display to left or right.
+Item defines either cursor or display we want to move. Two possible values for item are defined:
 - HD44780_CURSOR, 
 - HD44780_DISPLAY.
 
