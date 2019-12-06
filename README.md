@@ -106,7 +106,7 @@ Turn on the cursor. Cursor will be visible.
 ```c
 void HD44780_CursorBlink (void)
 ```
-Turn the cursor blink.
+Turn the cursor blink. Cursor will be visible and it will blink.
 
 ### HD44780_DrawChar
 ```c
@@ -124,7 +124,9 @@ Draw string.
 ```c
 char HD44780_PositionXY (char x, char y)
 ```
-Set DDRAM or CGRAM position on X, Y.
+Set DDRAM or CGRAM on specific position X, Y. For LCD 16x2 (cols, rows) maximal possible values:
+- X from interval values {0; 1; ... 16},
+- Y from interval values {0; 1}.
 
 ### HD44780_Shift
 ```c
