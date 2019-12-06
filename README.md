@@ -4,9 +4,8 @@
 Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
 
 ## Library
-Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit and 8-bit communication.
+Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit.
 - [4-bit Operation](#4-bit-operation)
-- [8-bit Operation](#8-bit-operation)
 
 ### Usage
 Prior defined for Atmega16 / Atmega8.
@@ -104,7 +103,15 @@ Draw string.
 Set DDRAM or CGRAM position on X, Y.
 
 ### HD44780_Shift
-Shift cursor or display to left or right.
+```c
+char HD44780_Shift (char item, char direction)
+```
+Shift cursor or display to left or right. Item defines either cursor or display we want to move. Two possible values for item are defined:
+- HD44780_CURSOR, 
+- HD44780_DISPLAY.
+The second parameter is direction definition. Two possible values for direction are defined:
+- HD44780_RIGHT,
+- HD44780_LEFT.
 
 # Links
 [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
