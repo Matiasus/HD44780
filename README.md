@@ -109,6 +109,7 @@ char HD44780_Shift (char item, char direction)
 Shift cursor or display to left or right. Item defines either cursor or display we want to move. Two possible values for item are defined:
 - HD44780_CURSOR, 
 - HD44780_DISPLAY.
+
 The second parameter is direction definition. Two possible values for direction are defined:
 - HD44780_RIGHT,
 - HD44780_LEFT.
