@@ -82,7 +82,7 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 void HD44780_Init (void)
 ```
 Base initialisation function. If the electrical characteristics conditions listed under the table Power Supply Conditions Using
-Internal Reset Circuit are not met, the internal reset circuit will not operate normally and will fail to initialize the HD44780U. For such a case, initialization must be performed by the MPU as explained in the section [4-bit Operation](#4-bit-operation) or [8-bit Operation](#8-bit-operation) depending on mode.
+Internal Reset Circuit are not met, the internal reset circuit will not operate normally and will fail to initialize the HD44780U. For such a case, initialization must be performed by the MPU as explained in the section [4-bit Operation](#4-bit-operation) or 8-bit Operation depending on mode.
 
 ### HD44780_DisplayClear
 ```c
