@@ -11,8 +11,8 @@ Library was tested and proved on a **_16x2 LCD Display_** with **_Atmega16_**.
 
 ### Usage
 Prior defined for:
-- Atmega16 / Atmega8
-- LCD 16x2
+- **Atmega16 / Atmega8**
+- **LCD 16x2**
 
 ### 4-bit Operation
 
