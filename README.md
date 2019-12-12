@@ -9,6 +9,9 @@ Library is aimed for MCU ATmega16 / Atmega8 which supports [4-bit Operation](#4-
 ### Usage
 Prior defined for Atmega16 / Atmega8.
 
+### Tested
+Library was tested and proved on a **_16x2 LCD Display_** with **_Atmega16_**.
+
 ### 4-bit Operation
 
 Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
