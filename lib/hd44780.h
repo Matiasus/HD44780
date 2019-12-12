@@ -21,6 +21,11 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 
+  // Success
+  #ifndef SUCCESS
+    #define SUCCESS           0
+  #endif
+
   // Error
   #ifndef ERROR
     #define ERROR             1

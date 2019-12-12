@@ -4,13 +4,17 @@
 Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
 
 ## Library
-Library is aimed for MCU ATmega16 / Atmega8 which supports 4-bit.
-- [4-bit Operation](#4-bit-operation)
+Library is aimed for MCU ATmega16 / Atmega8 which supports [4-bit Operation](#initializing-4-bit-operation).
+
+### Tested
+Library was tested and proved on a **_16x2 LCD Display_** with **_Atmega16_**.
 
 ### Usage
-Prior defined for Atmega16 / Atmega8.
+Prior defined for:
+- **_Atmega16 / Atmega8_**
+- **_LCD 16x2_**
 
-### 4-bit Operation
+### Initializing 4-bit operation
 
 Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
  ```c
@@ -72,17 +76,17 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 - [HD44780_DisplayOn()](#hd44780_displayon) - turn on display
 - [HD44780_CursorOn()](#hd44780_cursoron) - turn on cursor
 - [HD44780_CursorBlink()](#hd44780_cursorblink) - blink the cursor blink
-- [HD44780_DrawChar(char character)](#hd44780_drawchar) - draw character on display
-- [HD44780_DrawString(char * str)](#hd44780_drawstring) - draw string
-- [HD44780_PositionXY(char x, char y)](#hd44780_positionxy) - set position X, Y
-- [HD44780_Shift(char item, char direction)](#hd44780_shift) - shift cursor or display to left or right
+- [HD44780_DrawChar(char)](#hd44780_drawchar) - draw character on display
+- [HD44780_DrawString(char *)](#hd44780_drawstring) - draw string
+- [HD44780_PositionXY(char, char)](#hd44780_positionxy) - set position X, Y
+- [HD44780_Shift(char, char)](#hd44780_shift) - shift cursor or display to left or right
 
 ### HD44780_Init
 ```c
 void HD44780_Init (void)
 ```
 Base initialisation function. If the electrical characteristics conditions listed under the table Power Supply Conditions Using
-Internal Reset Circuit are not met, the internal reset circuit will not operate normally and will fail to initialize the HD44780U. For such a case, initialization must be performed by the MPU as explained in the section [4-bit Operation](#4-bit-operation) or [8-bit Operation](#8-bit-operation) depending on mode.
+Internal Reset Circuit are not met, the internal reset circuit will not operate normally and will fail to initialize the HD44780U. For such a case, initialization must be performed by the MPU as explained in the section [4-bit Operation](#4-bit-operation) or 8-bit Operation depending on mode.
 
 ### HD44780_DisplayClear
 ```c
@@ -112,7 +116,7 @@ Turn the cursor blink. Cursor will be visible and it will blink.
 ```c
 void HD44780_DrawChar (char character)
 ```
-Draw specific char on display according to ANSI table.
+Draw specific char on display according to [ASCII table](http://www.asciitable.com/).
 
 ### HD44780_DrawString
 ```c
