@@ -6,11 +6,11 @@ Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datashee
 ## Library
 Library is aimed for MCU ATmega16 / Atmega8 which supports [4-bit Operation](#4-bit-operation).
 
-### Usage
-Prior defined for Atmega16 / Atmega8.
-
 ### Tested
 Library was tested and proved on a **_16x2 LCD Display_** with **_Atmega16_**.
+
+### Usage
+Prior defined for Atmega16 / Atmega8.
 
 ### 4-bit Operation
 
