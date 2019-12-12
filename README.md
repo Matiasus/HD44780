@@ -111,7 +111,7 @@ Turn the cursor blink. Cursor will be visible and it will blink.
 ```c
 void HD44780_DrawChar (char character)
 ```
-Draw specific char on display according to ANSI table.
+Draw specific char on display according to [ASCII table](http://www.asciitable.com/).
 
 ### HD44780_DrawString
 ```c
