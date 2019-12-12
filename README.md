@@ -71,8 +71,8 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 - [HD44780_DisplayOn()](#hd44780_displayon) - turn on display
 - [HD44780_CursorOn()](#hd44780_cursoron) - turn on cursor
 - [HD44780_CursorBlink()](#hd44780_cursorblink) - blink the cursor blink
-- [HD44780_DrawChar(charr)](#hd44780_drawchar) - draw character on display
-- [HD44780_DrawString(char * str)](#hd44780_drawstring) - draw string
+- [HD44780_DrawChar(char)](#hd44780_drawchar) - draw character on display
+- [HD44780_DrawString(char *)](#hd44780_drawstring) - draw string
 - [HD44780_PositionXY(char, char)](#hd44780_positionxy) - set position X, Y
 - [HD44780_Shift(char, char)](#hd44780_shift) - shift cursor or display to left or right
 
