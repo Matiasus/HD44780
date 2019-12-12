@@ -10,7 +10,9 @@ Library is aimed for MCU ATmega16 / Atmega8 which supports [4-bit Operation](#4-
 Library was tested and proved on a **_16x2 LCD Display_** with **_Atmega16_**.
 
 ### Usage
-Prior defined for Atmega16 / Atmega8.
+Prior defined for:
+- Atmega16 / Atmega8
+- LCD 16x2
 
 ### 4-bit Operation
 
