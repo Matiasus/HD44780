@@ -40,27 +40,6 @@ int main (void)
   // display clear
   HD44780_CursorOn();
 
-  _delay_ms(1000);
-  
-  // shift cursor to right
-  HD44780_Shift(HD44780_CURSOR, HD44780_LEFT);
-
-  _delay_ms(1000);
-  
-  // shift cursor to right
-  HD44780_Shift(HD44780_CURSOR, HD44780_RIGHT);
-
-  _delay_ms(1000);
-  
-  // shift cursor to right
-  HD44780_Shift(HD44780_DISPLAY, HD44780_LEFT);
-
-  _delay_ms(1000);
-  
-  // shift cursor to right
-  HD44780_Shift(HD44780_DISPLAY, HD44780_RIGHT);
-
-
   // return value
-  return 0;
+  return SUCCESS;
 }
