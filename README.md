@@ -129,7 +129,7 @@ Draw string.
 char HD44780_PositionXY (char x, char y)
 ```
 Set DDRAM or CGRAM at the specific position X, Y. For LCD 16x2 (cols, rows) maximal possible values:
-- X from interval values {0; 1; ... 16},
+- X from interval values {0; 1; ... 15},
 - Y from interval values {0; 1}.
 
 ### HD44780_Shift
