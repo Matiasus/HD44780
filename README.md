@@ -37,13 +37,13 @@ Initializing LCD Driver HD44780 according to Figure 24 in [HD44780 Datasheet](ht
 // +---------------------------+
 //              |
 // +---------------------------+   // Initial sequence 0x30
-// |  RS R/W DB7 DB6 DB5 DB4   |   // 37 us writing DATA into D(C)DRAM
+// |  RS R/W DB7 DB6 DB5 DB4   |   // 37 us writing DATA into DDRAM or CGRAM
 // |   0   0   0   0   1   1   |   // 4us tadd - time after BF disapeared
 // | Wait for more than 45 us  |   // 37 us + 4 us = 41 us * (270/250) = 45us
 // +---------------------------+  
 //              |
 // +---------------------------+   // 4bit mode 0x20
-// |  RS R/W DB7 DB6 DB5 DB4   |   // 37 us writing DATA into D(C)DRAM
+// |  RS R/W DB7 DB6 DB5 DB4   |   // 37 us writing DATA into DDRAM or CGRAM
 // |   0   0   0   0   1   0   |   // 4us tadd - time after BF disapeared
 // | Wait for more than 45 us  |   // !!! BUSY FLAG CHECK DOESN'T WORK CORRECTLY !!!
 // +---------------------------+
@@ -129,7 +129,7 @@ Draw string.
 char HD44780_PositionXY (char x, char y)
 ```
 Set DDRAM or CGRAM at the specific position X, Y. For LCD 16x2 (cols, rows) maximal possible values:
-- X from interval values {0; 1; ... 16},
+- X from interval values {0; 1; ... 15},
 - Y from interval values {0; 1}.
 
 ### HD44780_Shift
