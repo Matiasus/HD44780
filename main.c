@@ -7,9 +7,8 @@
  * @author      Marian Hrinko
  * @datum       25.11.2019
  * @file        hd44780.c
- * @tested      AVR Atmega16 / AVR Atmega8
- * @descript    Main file for test library LCD with HD44780 driver
- * @usage       
+ * @tested      AVR Atmega16
+ * @description Main file for test library LCD with HD44780 driver 
  */
 
 // include libraries
@@ -19,7 +18,7 @@
 #include "lib/hd44780.h"
 
 /**
- * @desc    Main
+ * @desc    Main function
  *
  * @param   void
  * @return  int
@@ -28,7 +27,6 @@ int main (void)
 {
   // init diplay in 4 bit mode
   HD44780_Init();
-
   // display clear
   HD44780_DisplayClear();
   // send char
@@ -39,24 +37,7 @@ int main (void)
   HD44780_DrawString("MARIAN");
   // display clear
   HD44780_CursorOn();
-  // delay
-  _delay_ms(1000);
-  
-  // Check shifting
-  // -----------------------------------------
-  // shift cursor to left
-  HD44780_Shift(HD44780_CURSOR, HD44780_LEFT);
-  _delay_ms(1000);  
-  // shift cursor to right
-  HD44780_Shift(HD44780_CURSOR, HD44780_RIGHT);
-  _delay_ms(1000);  
-  // shift display to left
-  HD44780_Shift(HD44780_DISPLAY, HD44780_LEFT);
-  _delay_ms(1000);  
-  // shift display to right
-  HD44780_Shift(HD44780_DISPLAY, HD44780_RIGHT);
-  // -------------------------------------------
-  
+
   // return value
-  return 0;
+  return SUCCESS;
 }
