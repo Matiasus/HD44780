@@ -7,9 +7,8 @@
  * @author      Marian Hrinko
  * @datum       25.11.2019
  * @file        hd44780.c
- * @tested      AVR Atmega16 / AVR Atmega8
- * @descript    Main file for test library LCD with HD44780 driver
- * @usage       
+ * @tested      AVR Atmega16
+ * @description Main file for test library LCD with HD44780 driver 
  */
 
 // include libraries
@@ -19,16 +18,15 @@
 #include "lib/hd44780.h"
 
 /**
- * @desc    Main
+ * @desc    Main function
  *
  * @param   void
- * @return  void
+ * @return  int
  */
 int main (void)
 {
   // init diplay in 4 bit mode
   HD44780_Init();
-
   // display clear
   HD44780_DisplayClear();
   // send char
