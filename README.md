@@ -145,5 +145,8 @@ The second parameter is direction definition. Two possible values for direction 
 - HD44780_RIGHT,
 - HD44780_LEFT.
 
+# Demonstration
+<img src="imgage/lcd.jpg" />
+
 # Links
-[HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
+- [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf)
