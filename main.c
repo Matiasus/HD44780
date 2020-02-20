@@ -29,12 +29,10 @@ int main (void)
   HD44780_Init();
   // display clear
   HD44780_DisplayClear();
-  // send char
-  HD44780_DrawString("I LOVE YOU TINKA");
   // set position
-  HD44780_PositionXY(5, 1);
+  HD44780_PositionXY(6, 0);
   // send char
-  HD44780_DrawString("MARIAN");
+  HD44780_DrawString("BOOM");
   // display clear
   HD44780_CursorOn();
 
