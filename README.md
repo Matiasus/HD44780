@@ -1,4 +1,4 @@
-# C-library for HD44780 LCD driver
+# C Library for HD44780 LCD driver
 
 ## HD44780 Description
 Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
