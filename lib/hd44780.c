@@ -1,18 +1,17 @@
-/**
- * HD44780 Driver Communication
- *
- * Copyright (C) 2019 Marian Hrinko.
- * Written by Marian Hrinko (mato.hrinko@gmail.com)
+/** 
+ * ---------------------------------------------------------------+ 
+ * @desc        HD44780 LCD Driver 
+ * ---------------------------------------------------------------+ 
+ *              Copyright (C) 2020 Marian Hrinko.
+ *              Written by Marian Hrinko (mato.hrinko@gmail.com)
  *
  * @author      Marian Hrinko
- * @datum       05.11.2019
+ * @datum       18.11.2020
  * @file        hd44780.c
- * @tested      AVR Atmega16 / AVR Atmega8
- * @descript    Library designed for LCD with HD44780 driver
- * @usage       default set 16x2 LCD / but different possibilities 1 row, 80 characters etc
- *              4-bit or 8bit mode (4-bit mode tested under atmega16) with 3 control wires (RW, RS, E)
- *              8-bit or 8bit mode (8-bit mode tested under atmega16) with 3 control wires (RW, RS, E)
- * 
+ * @tested      AVR Atmega328p
+ *
+ * @depend      hd44780
+ * ---------------------------------------------------------------+
  */
 
 // include libraries
@@ -53,7 +52,7 @@
 //              |
 // +---------------------------+
 // |  RS R/W DB7 DB6 DB5 DB4   |   // Display off 0x08
-// |   0   0   0   0   0   0   |   // 
+// |   0   0   0   0   1   0   |   // 
 // |   0   0   1   0   0   0   |   // 
 // |    Wait for BF Cleared    |   // Wait for BF Cleared
 // +---------------------------+
@@ -76,6 +75,7 @@
  * @desc    LCD display clear
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_DisplayClear (void)
@@ -88,6 +88,7 @@ void HD44780_DisplayClear (void)
  * @desc    LCD display on
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_DisplayOn (void)
@@ -100,6 +101,7 @@ void HD44780_DisplayOn (void)
  * @desc    LCD cursor on, display on
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_CursorOn (void)
@@ -112,6 +114,7 @@ void HD44780_CursorOn (void)
  * @desc    LCD cursor blink, cursor on, display on
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_CursorBlink (void)
@@ -124,6 +127,7 @@ void HD44780_CursorBlink (void)
  * @desc    LCD draw char
  *
  * @param   char
+ *
  * @return  void
  */
 void HD44780_DrawChar (char character)
@@ -136,6 +140,7 @@ void HD44780_DrawChar (char character)
  * @desc    LCD draw string
  *
  * @param   char *
+ *
  * @return  void
  */
 void HD44780_DrawString (char *str)
@@ -153,6 +158,7 @@ void HD44780_DrawString (char *str)
  *
  * @param   char
  * @param   char
+ *
  * @return  char
  */
 char HD44780_PositionXY (char x, char y)
@@ -178,6 +184,7 @@ char HD44780_PositionXY (char x, char y)
  *
  * @param   char item {HD44780_CURSOR; HD44780_DISPLAY}
  * @param   char direction {HD44780_RIGHT; HD44780_LEFT}
+ *
  * @return  char
  */
 char HD44780_Shift (char item, char direction)
@@ -222,6 +229,7 @@ char HD44780_Shift (char item, char direction)
  * @desc    LCD init - initialisation routine
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_Init (void)
@@ -288,6 +296,7 @@ void HD44780_Init (void)
  * @desc    Check Busy Flag (BF) in 4 bit mode
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_CheckBFin4bitMode (void)
@@ -370,7 +379,8 @@ void HD44780_CheckBFin8bitMode (void)
 /**
  * @desc    LCD send instruction
  *
- * @param   unsigned char
+ * @param   unsigned short int 
+ *
  * @return  void
  */
 void HD44780_SendInstruction (unsigned short int data)
@@ -398,7 +408,8 @@ void HD44780_SendInstruction (unsigned short int data)
 /**
  * @desc    LCD send data
  *
- * @param   unsigned char
+ * @param   unsigned short int
+ *
  * @return  void
  */
 void HD44780_SendData (unsigned short int data)
@@ -430,6 +441,7 @@ void HD44780_SendData (unsigned short int data)
  * @desc    LCD send 4bits instruction in 4 bit mode
  *
  * @param   unsigned short int
+ *
  * @return  void
  */
 void HD44780_Send4bitsIn4bitMode (unsigned short int data)
@@ -451,6 +463,7 @@ void HD44780_Send4bitsIn4bitMode (unsigned short int data)
  * @desc    LCD send 8bits instruction in 4 bit mode
  *
  * @param   unsigned short int
+ *
  * @return  void
  */
 void HD44780_Send8bitsIn4bitMode (unsigned short int data)
@@ -488,6 +501,7 @@ void HD44780_Send8bitsIn4bitMode (unsigned short int data)
  * @desc    LCD send 8bits instruction in 8 bit mode
  *
  * @param   unsigned short int
+ *
  * @return  void
  */
 void HD44780_Send8bitsIn8bitMode (unsigned short int data)
@@ -511,6 +525,7 @@ void HD44780_Send8bitsIn8bitMode (unsigned short int data)
  * @desc    LCD send upper nibble
  *
  * @param   unsigned short int
+ *
  * @return  void
  */
 void HD44780_SetUppNibble (unsigned short int data)
@@ -531,6 +546,7 @@ void HD44780_SetUppNibble (unsigned short int data)
  * @desc    LCD send lower nibble
  *
  * @param   unsigned short int
+ *
  * @return  void
  */
 void HD44780_SetLowNibble (unsigned short int data)
@@ -551,6 +567,7 @@ void HD44780_SetLowNibble (unsigned short int data)
  * @desc    LCD pulse E
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_PulseE (void)
@@ -570,6 +587,7 @@ void HD44780_PulseE (void)
  * @desc    Set PORT DB4 to DB7
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_SetPORT_DB4to7 (void)
@@ -585,6 +603,7 @@ void HD44780_SetPORT_DB4to7 (void)
  * @desc    Clear DDR DB4 to DB7
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_ClearDDR_DB4to7 (void)
@@ -600,6 +619,7 @@ void HD44780_ClearDDR_DB4to7 (void)
  * @desc    Set DDR DB4 to DB7
  *
  * @param   void
+ *
  * @return  void
  */
 void HD44780_SetDDR_DB4to7 (void)
