@@ -6,10 +6,10 @@
  * @author      Marian Hrinko
  * @email       mato.hrinko@gmail.com
  * @datum       10.11.2020
- * @update      04.12.2020
+ * @update      15.04.2021
  * @file        main.c
  * @version     1.0
- * @tested      AVR Atmega328p
+ * @tested      AVR Atmega16a
  * ---------------------------------------------------+
  */
 
