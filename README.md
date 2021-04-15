@@ -125,7 +125,7 @@ Turn on the cursor. Cursor will be visible.
 ```c
 void HD44780_CursorOff (void)
 ```
-Turn off the cursor. Cursor will not be hide but display will be on.
+Turn off the cursor. Cursor will be hide but display will be on.
 
 ### HD44780_CursorBlink
 ```c
