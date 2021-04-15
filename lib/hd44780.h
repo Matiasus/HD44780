@@ -8,9 +8,9 @@
  * @author      Marian Hrinko
  * @datum       18.11.2020
  * @file        hd44780.c
- * @tested      AVR Atmega328p
+ * @tested      AVR Atmega16a
  *
- * @depend      hd44780
+ * @depend      
  * ---------------------------------------------------------------+
  * @usage       default set 16x2 LCD
  *              4-bit with 3 control wires (RW, RS, E)
@@ -41,74 +41,74 @@
     // E port
     // --------------------------------------
     #ifndef HD44780_DDR_E
-      #define HD44780_DDR_E   DDRD
+      #define HD44780_DDR_E       DDRD
     #endif  
     #ifndef HD44780_PORT_E
-      #define HD44780_PORT_E  PORTD
+      #define HD44780_PORT_E      PORTD
     #endif
     #ifndef HD44780_E
-      #define HD44780_E       3
+      #define HD44780_E           3
     #endif
 
     // RW port
     // --------------------------------------
     #ifndef HD44780_DDR_RW
-      #define HD44780_DDR_RW  DDRD
+      #define HD44780_DDR_RW      DDRD
     #endif  
     #ifndef HD44780_PORT_RW
-      #define HD44780_PORT_RW PORTD
+      #define HD44780_PORT_RW     PORTD
     #endif
     #ifndef HD44780_RW
-      #define HD44780_RW      2
+      #define HD44780_RW          2
     #endif
     
     // RS port
     // --------------------------------------
     #ifndef HD44780_DDR_RS
-      #define HD44780_DDR_RS  DDRD
+      #define HD44780_DDR_RS      DDRD
     #endif
     #ifndef HD44780_PORT_RS
-      #define HD44780_PORT_RS PORTD
+      #define HD44780_PORT_RS     PORTD
     #endif    
     #ifndef HD44780_RS
-      #define HD44780_RS      1
+      #define HD44780_RS          1
     #endif
     
     // DATA port / pin
     // --------------------------------------
-    #ifndef HD44780_DDR_DB
-      #define HD44780_DDR_DB   DDRD
+    #ifndef HD44780_DDR_DATA
+      #define HD44780_DDR_DATA    DDRD
     #endif
-    #ifndef HD44780_PORT_DB
-      #define HD44780_PORT_DB  PORTD
+    #ifndef HD44780_PORT_DATA
+      #define HD44780_PORT_DATA   PORTD
     #endif
-    #ifndef HD44780_PIN_DB
-      #define HD44780_PIN_DB   PIND
+    #ifndef HD44780_PIN_DATA
+      #define HD44780_PIN_DATA    PIND
     #endif
     // pins
-    #ifndef HD44780_DB7    
-      #define HD44780_DB7 7 // LCD PORT DB7
+    #ifndef HD44780_DATA7    
+      #define HD44780_DATA7       7 // LCD PORT DB7
     #endif
-    #ifndef HD44780_DB6
-      #define HD44780_DB6 6 // LCD PORT DB6
+    #ifndef HD44780_DATA6
+      #define HD44780_DATA6       6 // LCD PORT DB6
     #endif
-    #ifndef HD44780_DB5    
-      #define HD44780_DB5 5 // LCD PORT DB5
+    #ifndef HD44780_DATA5    
+      #define HD44780_DATA5       5 // LCD PORT DB5
     #endif
-    #ifndef HD44780_DB4    
-      #define HD44780_DB4 4 // LCD PORT DB4
+    #ifndef HD44780_DATA4    
+      #define HD44780_DATA4       4 // LCD PORT DB4
     #endif
-    #ifndef HD44780_DB3    
-      #define HD44780_DB3 3 // LCD PORT DB3
+    #ifndef HD44780_DATA3    
+      #define HD44780_DATA3       3 // LCD PORT DB3
     #endif
-    #ifndef HD44780_DB2    
-      #define HD44780_DB2 2 // LCD PORT DB2
+    #ifndef HD44780_DATA2    
+      #define HD44780_DATA2       2 // LCD PORT DB2
     #endif
-    #ifndef HD44780_DB1    
-      #define HD44780_DB1 1 // LCD PORT DB1
+    #ifndef HD44780_DATA1    
+      #define HD44780_DATA1       1 // LCD PORT DB1
     #endif
-    #ifndef HD44780_DB0    
-      #define HD44780_DB0 0 // LCD PORT DB0
+    #ifndef HD44780_DATA0    
+      #define HD44780_DATA0       0 // LCD PORT DB0
     #endif   
 
   #endif
@@ -122,36 +122,36 @@
   #define BIT1 0x02
   #define BIT0 0x01
   
-  #define HD44780_BUSY_FLAG    HD44780_DB7
-  #define HD44780_INIT_SEQ     0x30
-  #define HD44780_DISP_CLEAR   0x01
-  #define HD44780_DISP_OFF     0x08
-  #define HD44780_DISP_ON      0x0C
-  #define HD44780_CURSOR_ON    0x0E
-  #define HD44780_CURSOR_OFF   0x0C
-  #define HD44780_CURSOR_BLINK 0x0F
-  #define HD44780_RETURN_HOME  0x02 
-  #define HD44780_ENTRY_MODE   0x06
-  #define HD44780_4BIT_MODE    0x20
-  #define HD44780_8BIT_MODE    0x30
-  #define HD44780_2_ROWS       0x08
-  #define HD44780_FONT_5x8     0x00
-  #define HD44780_FONT_5x10    0x04
-  #define HD44780_POSITION     0x80
+  #define HD44780_BUSY_FLAG       HD44780_DATA7
+  #define HD44780_INIT_SEQ        0x30
+  #define HD44780_DISP_CLEAR      0x01
+  #define HD44780_DISP_OFF        0x08
+  #define HD44780_DISP_ON         0x0C
+  #define HD44780_CURSOR_ON       0x0E
+  #define HD44780_CURSOR_OFF      0x0C
+  #define HD44780_CURSOR_BLINK    0x0F
+  #define HD44780_RETURN_HOME     0x02 
+  #define HD44780_ENTRY_MODE      0x06
+  #define HD44780_4BIT_MODE       0x20
+  #define HD44780_8BIT_MODE       0x30
+  #define HD44780_2_ROWS          0x08
+  #define HD44780_FONT_5x8        0x00
+  #define HD44780_FONT_5x10       0x04
+  #define HD44780_POSITION        0x80
 
-  #define HD44780_SHIFT        0x10
-  #define HD44780_CURSOR       0x00
-  #define HD44780_DISPLAY      0x08
-  #define HD44780_LEFT         0x00
-  #define HD44780_RIGHT        0x04
+  #define HD44780_SHIFT           0x10
+  #define HD44780_CURSOR          0x00
+  #define HD44780_DISPLAY         0x08
+  #define HD44780_LEFT            0x00
+  #define HD44780_RIGHT           0x04
 
-  #define HD44780_ROWS         2
-  #define HD44780_COLS         16
+  #define HD44780_ROWS            2
+  #define HD44780_COLS            16
 
-  #define HD44780_ROW1_START   0x00
-  #define HD44780_ROW1_END     HD44780_COLS
-  #define HD44780_ROW2_START   0x40
-  #define HD44780_ROW2_END     HD44780_COLS
+  #define HD44780_ROW1_START      0x00
+  #define HD44780_ROW1_END        HD44780_COLS
+  #define HD44780_ROW2_START      0x40
+  #define HD44780_ROW2_END        HD44780_COLS
 
   // **********************************************
   //                      !!!
@@ -163,12 +163,12 @@
   //  HD44780_8BIT_MODE - 8 bit mode / 8 data wires    
   //
   // **********************************************
-  #define HD44780_MODE         HD44780_4BIT_MODE
+  #define HD44780_MODE            HD44780_4BIT_MODE
   
   // set bit
-  #define SETBIT(REG, BIT) { REG |= (1 << BIT); }
+  #define SETBIT(REG, BIT)        { REG |= (1 << BIT); }
   // clear bit
-  #define CLRBIT(REG, BIT) { REG &= ~(1 << BIT); }
+  #define CLRBIT(REG, BIT)        { REG &= ~(1 << BIT); }
   // set port / pin if bit is set
   #define SET_IF_BIT_IS_SET(REG, PORT, DATA, BIT) { if((DATA & BIT) > 0) { SETBIT(REG, PORT); } }
   
@@ -360,7 +360,7 @@
    *
    * @return  void
    */
-  void HD44780_SetPORT_DB4to7 (void);
+  void HD44780_SetPORT_DATA4to7 (void);
 
   /**
    * @desc    Set DDR DB4 to DB7
@@ -369,7 +369,7 @@
    *
    * @return  void
    */
-  void HD44780_SetDDR_DB4to7 (void);
+  void HD44780_SetDDR_DATA4to7 (void);
 
   /**
    * @desc    Clear DDR DB4 to DB7
@@ -378,6 +378,6 @@
    *
    * @return  void
    */
-  void HD44780_ClearDDR_DB4to7 (void);
+  void HD44780_ClearDDR_DATA4to7 (void);
 
 #endif
