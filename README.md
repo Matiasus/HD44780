@@ -6,8 +6,8 @@ Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datashee
 ## Hardware connection
 | PORT LCD | PORT ATMEGA16A | Description |
 | :---: | :---: |  :---: |
-| USS | 5V | Supply Voltage |
-| UDD | GND | Ground |
+| USS | 5V | Ground |
+| UDD | GND | Supply Voltage |
 | U0 | Potentiometer | Contrast Adjustment |
 | RS | PORTD 1 | Data/Instruction Select |
 | RW | PORTD 2 | Read/Write Select |
