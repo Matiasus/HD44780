@@ -41,7 +41,7 @@ int main (void)
   // delay
   _delay_ms(2000);
 
-  // CUROSR ON
+  // CURSOR ON & DISPLAY ON
   // --------------------------
   // display clear
   HD44780_DisplayClear();
@@ -54,7 +54,7 @@ int main (void)
   // delay
   _delay_ms(2000);
 
-  // CUROSR BLINK
+  // CURSOR BLINK & DISPLAY ON
   // --------------------------
   // display clear
   HD44780_DisplayClear();
@@ -67,7 +67,7 @@ int main (void)
   // delay
   _delay_ms(2000);
 
-  // CUROSR OFF
+  // CURSOR OFF & DISPLAY ON
   // --------------------------
   // display clear
   HD44780_DisplayClear();
