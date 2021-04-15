@@ -19,9 +19,6 @@
 #ifndef __HD44780_H__
 #define __HD44780_H__
 
-#include <avr/io.h>
-#include <avr/pgmspace.h>
-
   // Success
   #ifndef SUCCESS
     #define SUCCESS           0
@@ -42,6 +39,7 @@
   #if defined(__AVR_ATmega16__)
 
     // E port
+    // --------------------------------------
     #ifndef HD44780_DDR_E
       #define HD44780_DDR_E   DDRD
     #endif  
@@ -53,6 +51,7 @@
     #endif
 
     // RW port
+    // --------------------------------------
     #ifndef HD44780_DDR_RW
       #define HD44780_DDR_RW  DDRD
     #endif  
@@ -64,6 +63,7 @@
     #endif
     
     // RS port
+    // --------------------------------------
     #ifndef HD44780_DDR_RS
       #define HD44780_DDR_RS  DDRD
     #endif
@@ -75,6 +75,7 @@
     #endif
     
     // DATA port / pin
+    // --------------------------------------
     #ifndef HD44780_DDR_DB
       #define HD44780_DDR_DB   DDRD
     #endif
@@ -84,8 +85,7 @@
     #ifndef HD44780_PIN_DB
       #define HD44780_PIN_DB   PIND
     #endif
-
-    // port / pin 
+    // pins
     #ifndef HD44780_DB7    
       #define HD44780_DB7 7 // LCD PORT DB7
     #endif
@@ -128,6 +128,7 @@
   #define HD44780_DISP_OFF     0x08
   #define HD44780_DISP_ON      0x0C
   #define HD44780_CURSOR_ON    0x0E
+  #define HD44780_CURSOR_OFF   0x0C
   #define HD44780_CURSOR_BLINK 0x0F
   #define HD44780_RETURN_HOME  0x02 
   #define HD44780_ENTRY_MODE   0x06
@@ -178,7 +179,7 @@
    *
    * @return  void
    */
-  void HD44780_Init(void);
+  void HD44780_Init (void);
 
   /**
    * @desc    LCD display clear
@@ -206,6 +207,15 @@
    * @return  void
    */
   void HD44780_CursorOn (void);
+
+  /**
+   * @desc    LCD cursor off
+   *
+   * @param   void
+   *
+   * @return  void
+   */
+  void HD44780_CursorOff (void);
 
   /**
    * @desc    LCD cursor blink, cursor on, display on

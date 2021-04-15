@@ -3,6 +3,20 @@
 ## HD44780 Description
 Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datasheets/LCD/HD44780.pdf).
 
+## Hardware connection
+| PORT LCD | PORT ATMEGA328P | Description |
+| :---: | :---: |  :---: |
+| USS | 5V | Supply Voltage |
+| UDD | GND | Ground |
+| U0 | Potentiometer | Voltage from 10k potentiometer |
+| RS | PORTD 1 | Reset |
+| RW | PORTD 2 | Read / Write |
+| E | PORTC 3 | Enable |
+| D4 | PORTD 4 | Data bit 4 |
+| D5 | PORTD 5 | Data bit 5 |
+| D6 | PORTD 6 | Data bit 6 |
+| D7 | PORTD 7 | Data bit 7 |
+
 ## Library
 Library is aimed for MCU ATmega16 / Atmega8 which supports [4-bit Operation](#initializing-4-bit-operation).
 

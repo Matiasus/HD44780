@@ -1,20 +1,20 @@
-/**
- * HD44780 Driver Communication
- *
- * Copyright (C) 2019 Marian Hrinko.
- * Written by Marian Hrinko (mato.hrinko@gmail.com)
- *
+/** 
+ * ---------------------------------------------------+ 
+ * @desc        Main file
+ * ---------------------------------------------------+ 
+ * @copyright   Copyright (C) 2020 Marian Hrinko.
  * @author      Marian Hrinko
- * @datum       25.11.2019
- * @file        hd44780.c
- * @tested      AVR Atmega16
- * @description Main file for test library LCD with HD44780 driver 
+ * @email       mato.hrinko@gmail.com
+ * @datum       10.11.2020
+ * @update      04.12.2020
+ * @file        main.c
+ * @version     1.0
+ * @tested      AVR Atmega328p
+ * ---------------------------------------------------+
  */
 
 // include libraries
-#include <stdio.h>
 #include <util/delay.h>
-#include <avr/io.h>
 #include "lib/hd44780.h"
 
 /**
@@ -27,15 +27,59 @@ int main (void)
 {
   // init diplay in 4 bit mode
   HD44780_Init();
+
+  // DISPALY ON
+  // --------------------------
   // display clear
   HD44780_DisplayClear();
   // set position
-  HD44780_PositionXY(6, 0);
+  HD44780_PositionXY(0, 0);
   // send char
-  HD44780_DrawString("BOOM");
+  HD44780_DrawString("DISPLAY ON");
   // display clear
-  HD44780_CursorOn();
+  HD44780_DisplayOn();
+  // delay
+  _delay_ms(2000);
 
-  // return value
-  return SUCCESS;
+  // CUROSR ON
+  // --------------------------
+  // display clear
+  HD44780_DisplayClear();
+  // set position
+  HD44780_PositionXY(0, 0);
+  // send char
+  HD44780_DrawString("CURSOR ON");
+  // cursor on
+  HD44780_CursorOn();
+  // delay
+  _delay_ms(2000);
+
+  // CUROSR BLINK
+  // --------------------------
+  // display clear
+  HD44780_DisplayClear();
+  // set position
+  HD44780_PositionXY(0, 0);
+  // send char
+  HD44780_DrawString("CURSOR BLINK");
+  // delay
+  HD44780_CursorBlink();
+  // delay
+  _delay_ms(2000);
+
+  // CUROSR OFF
+  // --------------------------
+  // display clear
+  HD44780_DisplayClear();
+  // set position
+  HD44780_PositionXY(0, 0);
+  // send char
+  HD44780_DrawString("CURSOR OFF");
+  // delay
+  HD44780_CursorOff();
+
+  // EXIT
+  // ------------------------------------------------- 
+  // return & exit
+  return 0;
 }

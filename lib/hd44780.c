@@ -111,6 +111,19 @@ void HD44780_CursorOn (void)
 }
 
 /**
+ * @desc    LCD cursor off
+ *
+ * @param   void
+ *
+ * @return  void
+ */
+void HD44780_CursorOff (void)
+{
+  // send instruction - cursor on
+  HD44780_SendInstruction(HD44780_CURSOR_OFF);
+}
+
+/**
  * @desc    LCD cursor blink, cursor on, display on
  *
  * @param   void
