@@ -11,7 +11,7 @@ Detailed information is in [HD44780 Datasheet](https://www.sparkfun.com/datashee
 | U0 | Potentiometer | Contrast Adjustment |
 | RS | PORTD 1 | Data/Instruction Select |
 | RW | PORTD 2 | Read/Write Select |
-| E | PORTC 3 | Enable Signal |
+| E | PORTD 3 | Enable Signal |
 | D4 | PORTD 4 | Data bit 4 |
 | D5 | PORTD 5 | Data bit 5 |
 | D6 | PORTD 6 | Data bit 6 |
