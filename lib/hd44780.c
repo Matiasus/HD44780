@@ -8,10 +8,12 @@
  * @author      Marian Hrinko
  * @datum       18.11.2020
  * @file        hd44780.c
- * @tested      AVR Atmega328p
+ * @tested      AVR Atmega16a
  *
- * @depend      hd44780
+ * @depend      hd44780.h
  * ---------------------------------------------------------------+
+ * @usage       default set 16x2 LCD
+ *              4-bit with 3 control wires (RW, RS, E)
  */
 
 // include libraries
@@ -255,7 +257,7 @@ void HD44780_Init (void)
   SETBIT(HD44780_DDR_RW, HD44780_RW);
 
   // set DB7-DB4 as output
-  HD44780_SetDDR_DB4to7();
+  HD44780_SetDDR_DATA4to7();
   
   // clear RS
   CLRBIT(HD44780_PORT_RS, HD44780_RS);
@@ -317,9 +319,9 @@ void HD44780_CheckBFin4bitMode (void)
   unsigned char input = 0;
 
   // clear DB7-DB4 as input
-  HD44780_ClearDDR_DB4to7();
+  HD44780_ClearDDR_DATA4to7();
   // set pull-up resistors for DB7-DB4 
-  HD44780_SetPORT_DB4to7();
+  HD44780_SetPORT_DATA4to7();
 
   // clear RS
   CLRBIT(HD44780_PORT_RS, HD44780_RS);
@@ -344,7 +346,7 @@ void HD44780_CheckBFin4bitMode (void)
     // PWeh > 0.5us
     _delay_us(0.5);
     // read upper nibble (tDDR > 360ns)
-    input = HD44780_PIN_DB;
+    input = HD44780_PIN_DATA;
     // Clear E
     CLRBIT(HD44780_PORT_E, HD44780_E);
     // TcycE > 1000ns -> delay depends on PWeh delay time
@@ -358,7 +360,7 @@ void HD44780_CheckBFin4bitMode (void)
     // PWeh > 0.5us
     _delay_us(0.5);
     // read lower nibble (tDDR > 360ns)
-    input |= HD44780_PIN_DB >> 4;
+    input |= HD44780_PIN_DATA >> 4;
     // Clear E
     CLRBIT(HD44780_PORT_E, HD44780_E);
     // TcycE > 1000ns -> delay depends on PWeh delay time
@@ -366,7 +368,7 @@ void HD44780_CheckBFin4bitMode (void)
     _delay_us(0.5);
 
     // check if DB7 is cleared
-    if (!(input & (1 << HD44780_DB7))) {
+    if (!(input & (1 << HD44780_DATA7))) {
       // if BF cleared -> end loop
       break;
     }
@@ -376,7 +378,7 @@ void HD44780_CheckBFin4bitMode (void)
   CLRBIT(HD44780_PORT_RW, HD44780_RW);
 
   // set DB7-DB4 as output
-  HD44780_SetDDR_DB4to7();
+  HD44780_SetDDR_DATA4to7();
 }
 
 /**
@@ -544,15 +546,15 @@ void HD44780_Send8bitsIn8bitMode (unsigned short int data)
 void HD44780_SetUppNibble (unsigned short int data)
 {
   // clear bits DB7-DB4
-  CLRBIT(HD44780_PORT_DB, HD44780_DB7);
-  CLRBIT(HD44780_PORT_DB, HD44780_DB6);
-  CLRBIT(HD44780_PORT_DB, HD44780_DB5);
-  CLRBIT(HD44780_PORT_DB, HD44780_DB4);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA7);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA6);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA5);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA4);
   // set DB7-DB4 if corresponding bit is set
-  if (data & 0x80) { SETBIT(HD44780_PORT_DB, HD44780_DB7); }
-  if (data & 0x40) { SETBIT(HD44780_PORT_DB, HD44780_DB6); }
-  if (data & 0x20) { SETBIT(HD44780_PORT_DB, HD44780_DB5); }
-  if (data & 0x10) { SETBIT(HD44780_PORT_DB, HD44780_DB4); }
+  if (data & 0x80) { SETBIT(HD44780_PORT_DATA, HD44780_DATA7); }
+  if (data & 0x40) { SETBIT(HD44780_PORT_DATA, HD44780_DATA6); }
+  if (data & 0x20) { SETBIT(HD44780_PORT_DATA, HD44780_DATA5); }
+  if (data & 0x10) { SETBIT(HD44780_PORT_DATA, HD44780_DATA4); }
 }
 
 /**
@@ -565,15 +567,15 @@ void HD44780_SetUppNibble (unsigned short int data)
 void HD44780_SetLowNibble (unsigned short int data)
 {
   // clear bits DB7-DB4
-  CLRBIT(HD44780_PORT_DB, HD44780_DB3);
-  CLRBIT(HD44780_PORT_DB, HD44780_DB2);
-  CLRBIT(HD44780_PORT_DB, HD44780_DB1);
-  CLRBIT(HD44780_PORT_DB, HD44780_DB0);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA3);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA2);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA1);
+  CLRBIT(HD44780_PORT_DATA, HD44780_DATA0);
   // set DB7-DB4 if corresponding bit is set
-  if (data & 0x08) { SETBIT(HD44780_PORT_DB, HD44780_DB3); }
-  if (data & 0x04) { SETBIT(HD44780_PORT_DB, HD44780_DB2); }
-  if (data & 0x02) { SETBIT(HD44780_PORT_DB, HD44780_DB1); }
-  if (data & 0x01) { SETBIT(HD44780_PORT_DB, HD44780_DB0); }
+  if (data & 0x08) { SETBIT(HD44780_PORT_DATA, HD44780_DATA3); }
+  if (data & 0x04) { SETBIT(HD44780_PORT_DATA, HD44780_DATA2); }
+  if (data & 0x02) { SETBIT(HD44780_PORT_DATA, HD44780_DATA1); }
+  if (data & 0x01) { SETBIT(HD44780_PORT_DATA, HD44780_DATA0); }
 }
 
 /**
@@ -603,13 +605,13 @@ void HD44780_PulseE (void)
  *
  * @return  void
  */
-void HD44780_SetPORT_DB4to7 (void)
+void HD44780_SetPORT_DATA4to7 (void)
 {
   // set DB4-DB7  
-  SETBIT(HD44780_PORT_DB, HD44780_DB4);
-  SETBIT(HD44780_PORT_DB, HD44780_DB5);
-  SETBIT(HD44780_PORT_DB, HD44780_DB6);
-  SETBIT(HD44780_PORT_DB, HD44780_DB7);
+  SETBIT(HD44780_PORT_DATA, HD44780_DATA4);
+  SETBIT(HD44780_PORT_DATA, HD44780_DATA5);
+  SETBIT(HD44780_PORT_DATA, HD44780_DATA6);
+  SETBIT(HD44780_PORT_DATA, HD44780_DATA7);
 }
 
 /**
@@ -619,13 +621,13 @@ void HD44780_SetPORT_DB4to7 (void)
  *
  * @return  void
  */
-void HD44780_ClearDDR_DB4to7 (void)
+void HD44780_ClearDDR_DATA4to7 (void)
 {
   // set DB4-DB7  
-  CLRBIT(HD44780_DDR_DB, HD44780_DB4);
-  CLRBIT(HD44780_DDR_DB, HD44780_DB5);
-  CLRBIT(HD44780_DDR_DB, HD44780_DB6);
-  CLRBIT(HD44780_DDR_DB, HD44780_DB7);
+  CLRBIT(HD44780_DDR_DATA, HD44780_DATA4);
+  CLRBIT(HD44780_DDR_DATA, HD44780_DATA5);
+  CLRBIT(HD44780_DDR_DATA, HD44780_DATA6);
+  CLRBIT(HD44780_DDR_DATA, HD44780_DATA7);
 }
 
 /**
@@ -635,11 +637,11 @@ void HD44780_ClearDDR_DB4to7 (void)
  *
  * @return  void
  */
-void HD44780_SetDDR_DB4to7 (void)
+void HD44780_SetDDR_DATA4to7 (void)
 {
   // set DB7-DB4 as output
-  SETBIT(HD44780_DDR_DB, HD44780_DB4);
-  SETBIT(HD44780_DDR_DB, HD44780_DB5);
-  SETBIT(HD44780_DDR_DB, HD44780_DB6);
-  SETBIT(HD44780_DDR_DB, HD44780_DB7);
+  SETBIT(HD44780_DDR_DATA, HD44780_DATA4);
+  SETBIT(HD44780_DDR_DATA, HD44780_DATA5);
+  SETBIT(HD44780_DDR_DATA, HD44780_DATA6);
+  SETBIT(HD44780_DDR_DATA, HD44780_DATA7);
 }
