@@ -119,19 +119,19 @@ Turn on the display.
 ```c
 void HD44780_CursorOn (void)
 ```
-Turn on the cursor. Cursor will be visible.
+Turn on the cursor. Cursor will be visible. IMPORTANT: Function [HD44780_CursorOn()](https://github.com/Matiasus/HD44780#hd44780_cursoron) besides the cursor on, switch the display on, so don't need to use function [HD44780_DisplayOn()](https://github.com/Matiasus/HD44780#hd44780_displayon). But without function [HD44780_CursorOn()](https://github.com/Matiasus/HD44780#hd44780_cursoron) display is switched on by the function [HD44780_DisplayOn()](https://github.com/Matiasus/HD44780#hd44780_displayon)
 
 ### HD44780_CursorOff
 ```c
 void HD44780_CursorOff (void)
 ```
-Turn off the cursor. Cursor will be hide but display will be on.
+Turn off the cursor. Cursor will be hide but display will be on. 
 
 ### HD44780_CursorBlink
 ```c
 void HD44780_CursorBlink (void)
 ```
-Turn the cursor blink. Cursor will be visible and it will blink.
+Turn the cursor blink. Cursor will be visible and it will blink. IMPORTANT: Function [HD44780_CursorBlink()](https://github.com/Matiasus/HD44780#hd44780_cursorblink) besides the cursor blink, switch the display on, so don't need to use function [HD44780_DisplayOn()](https://github.com/Matiasus/HD44780#hd44780_displayon). But without function [HD44780_CursorBlink()](https://github.com/Matiasus/HD44780#hd44780_cursorblink) display is switched on by the function [HD44780_DisplayOn()](https://github.com/Matiasus/HD44780#hd44780_displayon).
 
 ### HD44780_DrawChar
 ```c
